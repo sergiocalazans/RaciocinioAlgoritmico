@@ -1,8 +1,8 @@
 # Definindo as variáveis de Entrada
 
-nome = str(input('Qual o seu nome?'))
-alturaNome = float(input('Qual a sua altura? (em metros)' ))
-pesoNome = int(input('Qual o seu peso? (em Kg)'))
+nome = str(input('Qual o seu nome?')).strip()
+alturaNome = float(input('Qual a sua altura? (em metros)' )).strip()
+pesoNome = int(input('Qual o seu peso? (em Kg)')).strip()
 
 # Processamento
 

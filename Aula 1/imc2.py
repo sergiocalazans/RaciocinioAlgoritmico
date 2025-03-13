@@ -1,8 +1,8 @@
 # Definindo as variáveis de Entrada
 
 nome = str(input('Qual o seu nome?')).strip()
-alturaNome = float(input('Qual a sua altura? (em metros)' )).strip()
-pesoNome = int(input('Qual o seu peso? (em Kg)')).strip()
+alturaNome = float(input('Qual a sua altura? (em metros)' ))
+pesoNome = int(input('Qual o seu peso? (em Kg)'))
 
 # Processamento
 
@@ -15,14 +15,14 @@ def calculoImc(altura, peso):
         resposta = "Abaixo do Peso"
     elif 18.5 <= imc < 25:
         resposta = "Peso Normal"
-    elif imc in range(25, 30):
+    elif 25 <= imc < 30:
         resposta = "Sobrepeso"
-    elif imc in range(30, 35):
+    elif 30 <= imc < 35:
         resposta = "Obesidade"
     else:
-        resposta = "Imc não encontrado"
+        resposta = "não encontrado"
 
-    return print(f'{nome}, o seu IMC é {int(imc)} e a classificação sua é {resposta}')
+    return print(f'{nome}, o seu IMC é {int(imc)} e a sua classificação é {resposta}')
         
 
 # Saída

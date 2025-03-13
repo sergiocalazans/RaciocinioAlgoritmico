@@ -2,7 +2,7 @@
 
 nome = str(input('Qual o seu nome?')).strip()
 alturaNome = float(input('Qual a sua altura? (em metros)' ))
-pesoNome = int(input('Qual o seu peso? (em Kg)'))
+pesoNome = float(input('Qual o seu peso? (em Kg)'))
 
 # Processamento
 

@@ -6,8 +6,10 @@ peso = int(input('Qual o seu peso? (em Kg)'))
 
 # Processamento
 
+# Calculo do IMC
 imc = peso / (altura ** 2)
 
 # Saída
 
+# Imprimi o resultado do IMC
 print(f'{nome}, o seu IMC é: {imc}')

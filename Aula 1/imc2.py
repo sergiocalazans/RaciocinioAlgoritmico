@@ -6,6 +6,7 @@ pesoNome = int(input('Qual o seu peso? (em Kg)'))
 
 # Processamento
 
+# Função para calcular o IMC
 def calculoImc(altura, peso):
 
     imc = float(peso / (altura ** 2))
@@ -22,9 +23,12 @@ def calculoImc(altura, peso):
     else:
         resposta = "não encontrado"
 
+
+    # Retorna a impressão do resultado do IMC
     return print(f'{nome}, o seu IMC é {int(imc)} e a sua classificação é {resposta}')
         
 
 # Saída
 
+# Chamando a função
 calculoImc(alturaNome, pesoNome)

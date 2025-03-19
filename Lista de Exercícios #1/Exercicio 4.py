@@ -1,5 +1,8 @@
 # Resolução Exercício 4
 
+''' 4. Faça um algoritmo que recebe o valor de um produto e calcule os seguintes valores: 
+(1) a vista com 5% de desconto; (2) o valor da parcela em 2x; (3) o valor da parcela em 3x com acréscimo de 5%.'''
+
 # Definindo as variáveis de Entrada
 
 valorProduto = float(input("Digite o valor do produto: (Formato: xxx.xx) "))

@@ -1,5 +1,8 @@
 # Resolução Exercício 1
 
+''' 1. Faça um algoritmo que leia um número inteiro e escreva seu antecessor e sucesso.'''
+
+
 # Definindo as variáveis de Entrada
 
 num = int(input("Digite um número inteiro:")) # Número digitado

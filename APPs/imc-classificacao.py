@@ -14,11 +14,11 @@ def calculoImc(altura, peso):
 
     if imc <= 18.5:
         resposta = "Abaixo do Peso"
-    elif 18.5 <= imc < 25:
+    elif imc < 25:
         resposta = "Peso Normal"
-    elif 25 <= imc < 30:
+    elif imc < 30:
         resposta = "Sobrepeso"
-    elif 30 <= imc < 35:
+    elif imc < 35:
         resposta = "Obesidade"
     else:
         resposta = "não encontrado"

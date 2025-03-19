@@ -11,4 +11,4 @@ calculoSalarioMinimo = float(salarioDigitado / salarioMinimo)
 
 # Saída
 
-print(f"Você recebe {round(calculoSalarioMinimo, 2)} salários mínimo.")
+print(f"Você recebe {calculoSalarioMinimo:,.2f} salários mínimo.")

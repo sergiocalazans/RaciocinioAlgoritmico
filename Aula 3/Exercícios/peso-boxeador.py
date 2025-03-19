@@ -20,6 +20,8 @@ def calculoCategoria(peso):
         resposta = "Pesado"
     elif peso > 88:
         resposta = "Super Pesado"
+    else:
+        resposta = "não encontrado"
 
     return print(f"Sua categoria é: {resposta}")
 

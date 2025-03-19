@@ -12,6 +12,17 @@ listaNotas = [primeiraNota, segundaNota, terceiraNota]
 
 mediaNotas = sum(listaNotas) / len(listaNotas)
 
+def aprovacao(media):
+
+    resposta = ""
+
+    if media < 7:
+        resposta = "Reprovado"
+    else:
+        resposta = "Aprovado"
+    
+    return print(f"A média de suas notas é: {round(media, 2)} e o resultado é {resposta}")
+
 # Saída
 
-print(f"A média de suas notas é: {round(mediaNotas, 2)}")
+aprovacao(mediaNotas)

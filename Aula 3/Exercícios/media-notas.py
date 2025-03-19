@@ -1,5 +1,10 @@
 # Exercício 1
 
+''' 
+Dado o exercício do cálculo da média, verificar se o aluno está
+aprovado.
+'''
+
 # Definindo as variáveis de Entrada
 
 primeiraNota = float(input("Digite a sua primeira nota: "))

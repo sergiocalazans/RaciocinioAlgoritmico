@@ -16,8 +16,10 @@ def aprovacao(media):
 
     resposta = ""
 
-    if media < 7:
+    if media < 4:
         resposta = "Reprovado"
+    elif media < 7:
+        resposta = "Recuperação"
     else:
         resposta = "Aprovado"
     

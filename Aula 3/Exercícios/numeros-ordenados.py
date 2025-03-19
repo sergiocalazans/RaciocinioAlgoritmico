@@ -1,4 +1,6 @@
 # Exercício 4
 
-# Entrada
-
+'''
+Escreva um programa que recebe como entrada três números e os exibe
+ordenado.
+'''

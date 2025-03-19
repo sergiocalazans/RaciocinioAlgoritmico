@@ -12,13 +12,13 @@ def calculoCategoria(peso):
 
     if peso < 50:
         resposta = "Palha"
-    elif 50 <= peso < 60:
+    elif peso < 60:
         resposta = "Pluma"
-    elif 60 <= peso < 76:
+    elif peso < 76:
         resposta = "Leve"
-    elif 76 <= peso < 88:
+    elif peso < 88:
         resposta = "Pesado"
-    elif peso > 88:
+    elif peso >= 88:
         resposta = "Super Pesado"
     else:
         resposta = "não encontrado"

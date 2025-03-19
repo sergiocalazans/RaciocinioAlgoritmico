@@ -12,5 +12,11 @@ Conceito    Nota
  D            Nota maior que 6
  E            Nota maior que 4
  F            Nota menor ou igual a 4
- 
+
 '''
+
+# Entrada 
+
+notaDigitada = float(input("Digite sua nota: "))
+presencaDigitada = float(input("Digite sua presença: (formato: xx.xx)"))
+

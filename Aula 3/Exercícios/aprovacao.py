@@ -17,8 +17,8 @@ Conceito    Nota
 
 # Entrada 
 
-notaDigitada = float(input("Digite sua nota: "))
-presencaDigitada = float(input("Digite sua presença: (formato: xx.xx)"))
+notaDigitada = float(input("\nDigite sua nota: "))
+presencaDigitada = float(input("Digite sua presença: (formato: xx.xx) "))
 
 conceitos = {"A": 10,
             "B": 9,
@@ -44,8 +44,9 @@ def aprovacao(nota, presenca):
         if nota <= valor:
             respostaNota = chave
     
-    return print(f"Você foi {respostaPresenca} com o conceito {respostaNota}.")
+    return print(f"Então, você foi {respostaPresenca} com o conceito {respostaNota}.\n")
 
 # Saída
 
+print(f"\nSua nota é {notaDigitada} e a presença é de {presencaDigitada}%.")
 aprovacao(notaDigitada, presencaDigitada)

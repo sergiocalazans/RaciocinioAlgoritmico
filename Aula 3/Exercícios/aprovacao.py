@@ -37,8 +37,10 @@ def aprovacao(nota, presenca):
     respostaPresenca = ""
     respostaNota = ""
 
-    if presenca < 70 or nota < 7:
+    if presenca < 70 or nota < 4:
         respostaPresenca = "Reprovado"
+    elif nota < 7:
+        respostaPresenca = "de Recuperação"
     else:
         respostaPresenca = "Aprovado"
 
@@ -47,7 +49,7 @@ def aprovacao(nota, presenca):
         if nota <= valor:
             respostaNota = chave
     
-    return print(f"Então, você foi {respostaPresenca} com o conceito {respostaNota}.\n")
+    return print(f"Então, você está {respostaPresenca} com o conceito {respostaNota}.\n")
 
 # Saída
 

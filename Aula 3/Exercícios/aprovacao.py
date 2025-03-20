@@ -17,7 +17,7 @@ Conceito    Nota
 
 # Entrada 
 
-notaDigitada = float(input("\nDigite sua nota: "))
+notaDigitada = float(input("\nDigite sua nota: (formato: xx.xx) "))
 presencaDigitada = float(input("Digite sua presença: (formato: xx.xx) "))
 
 conceitos = {"A": 10,

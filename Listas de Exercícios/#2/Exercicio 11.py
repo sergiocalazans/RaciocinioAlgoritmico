@@ -14,7 +14,7 @@ mostre sua classificação segundo uma das seguintes categorias:
 
 # Entrada
 
-idade = int(input("Digite a idade do nadador: "))
+idade = int(input("\nDigite a idade do nadador: "))
 
 
 # Processamento
@@ -36,4 +36,4 @@ def classificar_nadador(id): # id - idade
 
 # Saída
 
-print(f"Classificação: {classificar_nadador(idade)}")
+print(f"\nClassificação: {classificar_nadador(idade)}.\n")

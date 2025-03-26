@@ -12,3 +12,27 @@ Caso não esteja, calcule sua massa máxima considerada normal (usando IMC igu
 
 '''
 
+# Definindo as variáveis de Entrada
+
+altura = float(input('\nQual a sua altura? (em metros) '))
+peso = float(input('\nQual o seu peso? (em Kg) '))
+
+# Processamento
+
+def calculoImc(h, p):
+
+    imc = round(float(p / (h ** 2)), 2)
+    resposta = ""
+
+    if 18.5 <= imc < 25:
+        resposta = f"o seu IMC é normal."
+    else:
+        p = round(float(24.9 * (h ** 2)), 2)
+        resposta = f"o seu IMC não está normal e sua massa considerada normal seria {p} Kg."
+
+    return print(f"\nResultado: {resposta}\n")
+        
+
+# Saída
+
+calculoImc(altura, peso)

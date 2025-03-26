@@ -18,12 +18,11 @@ while True:
 
     sexo = int(input("\nDigite o sexo da pessoa:  (use 1 - masculino e 2 - feminino) "))
 
-    if sexo != 1 and sexo != 2:
-        print("\nValor inválido, use 1 - masculino e 2 - feminino.")
-        continue
-    else:
+    if sexo in [1, 2]:
         print("\nValor válido.")
         break
+    else:
+        print("\nValor inválido.")
 
 # Processamento
 
@@ -34,7 +33,7 @@ def calculoPesoIdeal(h):
     else: 
         peso = (62.1 * h) - 44.7
     
-    return print(f"\nO peso ideal da pessoa deve ser: {round(peso, 2)} Kg.")
+    return print(f"\nO peso ideal deve ser: {round(peso, 2)} Kg.\n")
 
 # Saída
 

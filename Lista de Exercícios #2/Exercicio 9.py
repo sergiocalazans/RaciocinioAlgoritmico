@@ -14,7 +14,8 @@ idade = int(input("\nDigite sua idade: "))
 
 # Processamento
 
-def classeEleitoral(id):
+# Função de classificação eleitoral
+def classeEleitoral(id): # id - idade
 
     resposta = ""
 
@@ -26,9 +27,11 @@ def classeEleitoral(id):
     
     else:
         resposta = "eleitor obrigatório"
-    
+
+    # Retorna a classificação eleitoral
     return print(f"\nA sua classe eleitoral é {resposta}.\n")
 
 # Saída
 
+# Chamando a função
 classeEleitoral(idade)

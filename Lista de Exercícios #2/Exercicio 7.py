@@ -19,7 +19,8 @@ peso = float(input('\nQual o seu peso? (em Kg) '))
 
 # Processamento
 
-def calculoImc(h, p):
+# Função cálculo do imc considerando a faixa "normal"
+def calculoImc(h, p): # h - altura e p - peso
 
     imc = round(float(p / (h ** 2)), 2)
     resposta = ""
@@ -30,9 +31,11 @@ def calculoImc(h, p):
         p = round(float(24.9 * (h ** 2)), 2)
         resposta = f"o seu IMC não está normal e sua massa considerada normal seria {p} Kg."
 
+    # Retorna o resultado
     return print(f"\nResultado: {resposta}\n")
         
 
 # Saída
 
+# Chamando a função
 calculoImc(altura, peso)

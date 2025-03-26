@@ -17,3 +17,33 @@ Condição                  IMC em adultos
 
 '''
 
+# Definindo as variáveis de Entrada
+
+altura = float(input('\nQual a sua altura? (em metros) ' ))
+peso = float(input('\nQual o seu peso? (em Kg) '))
+
+# Processamento
+
+# Função do cálculo do IMC
+def calculoImc(h, p): # h - altura e p - peso
+
+    imc = float(p / (h ** 2))
+    resposta = ""
+
+    if imc < 18.5:
+        resposta = "Abaixo do Peso"
+    elif imc < 25:
+        resposta = "Peso Normal"
+    elif imc < 30:
+        resposta = "Sobrepeso"
+    else:
+        resposta = "Obesidade"
+  
+    # Retorna a impressão do resultado do IMC
+    return print(f'O seu IMC é {round(imc, 2)} e a sua classificação é {resposta}.')
+        
+
+# Saída
+
+# Chamando a função
+calculoImc(altura, peso)

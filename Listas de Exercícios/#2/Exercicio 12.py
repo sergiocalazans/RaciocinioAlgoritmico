@@ -19,7 +19,7 @@ Massa                      Categoria
 massa = float(input("\nDigite a massa do boxeador em kg: (em Kg)"))
 
 # Processamento
-def classificar_boxeador(m): # m - massa
+def classificarBoxeador(m): # m - massa
 
     # Conversão de kg para libras
     massaLb = m * 2.20462262
@@ -37,4 +37,4 @@ def classificar_boxeador(m): # m - massa
 
 # Saída
 
-print(f"\nClassificação: {classificar_boxeador(massa)}.\n")
+print(f"\nClassificação: {classificarBoxeador(massa)}.\n")

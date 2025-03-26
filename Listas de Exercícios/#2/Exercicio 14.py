@@ -6,9 +6,8 @@
 
 # Entrada
 
-num1 = int(input("\nDigite o primeiro número: "))
-num2 = int(input("\nDigite o segundo número: "))
-num3 = int(input("\nDigite o terceiro número: "))
+# Solicita três números ao usuário e os armazena em uma lista
+numeros = [int(input("Digite um número: ")) for _ in range(3)]
 
 # Processamento
 
@@ -17,4 +16,4 @@ def maiorNumero(a, b, c):
 
 # Saída
 
-print(f"\nO maior número é: {maiorNumero(num1, num2, num3)}.\n")
+print(f"\nO maior número é: {maiorNumero(*numeros)}.\n")

@@ -19,7 +19,7 @@ idade = int(input("\nDigite a idade do nadador: "))
 
 # Processamento
 
-def classificar_nadador(id): # id - idade
+def classificarNadador(id): # id - idade
 
     if 5 <= id <= 7:
         return "Infantil A"
@@ -36,4 +36,4 @@ def classificar_nadador(id): # id - idade
 
 # Saída
 
-print(f"\nClassificação: {classificar_nadador(idade)}.\n")
+print(f"\nClassificação: {classificarNadador(idade)}.\n")

@@ -45,5 +45,4 @@ def calculoImc(h, p): # h - altura e p - peso
 
 # Saída
 
-# Chamando a função
 calculoImc(altura, peso)

@@ -9,3 +9,34 @@ elabore um algoritmo que calcule o peso ideal (p) do usuário utilizando as seg
 
 '''
 
+# Entrada 
+
+altura = float(input("\nDigite a altura: "))
+
+
+while True:
+
+    sexo = int(input("\nDigite o sexo da pessoa:  (use 1 - masculino e 2 - feminino) "))
+
+    if sexo != 1 and sexo != 2:
+        print("\nValor inválido, use 1 - masculino e 2 - feminino.")
+        continue
+    else:
+        print("\nValor válido.")
+        break
+
+# Processamento
+
+def calculoPesoIdeal(h):
+
+    if sexo == 1:
+        peso = (72.7 * h) - 58
+    else: 
+        peso = (62.1 * h) - 44.7
+    
+    return print(f"\nO peso ideal da pessoa deve ser: {round(peso, 2)} Kg.")
+
+# Saída
+
+calculoPesoIdeal(altura)
+    

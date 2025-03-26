@@ -3,7 +3,7 @@
 '''
 7.	O IMC (Índice de Massa Corporal) é calculado através da seguinte fórmula: 
 
-IMC = massa / altura2
+IMC = massa / altura²
 
 Elabore um algoritmo que leia a massa (em quilogramas) e a altura (em metros) do usuário e 
 mostre o valor do IMC e se ele está na faixa considerada “normal” segundo o 
@@ -12,7 +12,7 @@ Caso não esteja, calcule sua massa máxima considerada normal (usando IMC igu
 
 '''
 
-# Definindo as variáveis de Entrada
+# Entrada
 
 altura = float(input('\nQual a sua altura? (em metros) '))
 peso = float(input('\nQual o seu peso? (em Kg) '))

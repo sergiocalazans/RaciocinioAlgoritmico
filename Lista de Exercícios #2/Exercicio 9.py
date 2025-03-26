@@ -8,3 +8,27 @@ que o voto é obrigatório para adultos entre 18 e 65 anos (eleitor obrigató
 que o voto é opcional para eleitores entre 16 e 18, ou maiores de 65 anos (eleitor facultativo). 
 '''
 
+# Entrada 
+
+idade = int(input("\nDigite sua idade: "))
+
+# Processamento
+
+def classeEleitoral(id):
+
+    resposta = ""
+
+    if id < 16:
+        resposta = "não votante"
+
+    elif 16 >= id <= 18 or id > 65:
+        resposta = "eleitor facultativo"
+    
+    else:
+        resposta = "eleitor obrigatório"
+    
+    return print(f"\nA sua classe eleitoral é {resposta}.\n")
+
+# Saída
+
+classeEleitoral(idade)

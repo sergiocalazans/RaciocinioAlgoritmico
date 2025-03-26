@@ -7,3 +7,13 @@ Elabore um algoritmo que leia o diâmetro de uma abóbora e mostre se ela é 
 Caso ela não se encaixe na classificação, informe “produto fora das medidas”.
 '''
 
+# Entrada
+
+diametroAbobora = float(input("\nDigite o diâmetro da abóbora: "))
+
+# Processamento e Saída
+
+if 15 <= diametroAbobora <= 20:
+    print("\nEssa abóbora é do tipo médio.\n")
+else:
+    print("\nEssa abóbora não é do tipo médio.\n")

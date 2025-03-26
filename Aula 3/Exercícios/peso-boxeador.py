@@ -3,6 +3,7 @@
 '''
 Escreva um algoritmo que dado o peso de um boxeador, informe
 a categoria a qual ele pertence, seguindo a tabela abaixo:
+
 Categoria       Peso (Kg)
  Palha            Menor que 50 Kg
  Pluma            50 - 59,99

@@ -5,3 +5,20 @@
 
 Exemplo: 1, 3, 5.....97, 99
 '''
+
+# Entrada
+
+contador = 1
+listaNum = []
+
+# Processamento
+
+while contador <= 97:
+
+    contador += 2
+    listaNum += [contador]
+
+# Saída
+
+print(f"\n{listaNum}\n")
+

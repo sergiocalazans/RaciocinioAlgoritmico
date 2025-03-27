@@ -9,12 +9,15 @@ Exemplo: 1, 3, 5.....97, 99
 # Entrada
 
 contador = 1
-listaNum = []
+listaNum = [contador]
 
 # Processamento
 
-while contador <= 97:
+while contador <= 99:
 
+    if contador == 99:
+        break
+    
     contador += 2
     listaNum += [contador]
 

@@ -8,13 +8,16 @@ Exemplo: 50, 45, 40.....5, 0
 
 # Entrada
 
-contador = 55
-listaNum = []
+contador = 50
+listaNum = [contador]
 
 # Processamento
 
 while contador >= 5:
 
+    if contador == 5:
+        break
+    
     contador -= 5
     listaNum += [contador]
 

@@ -8,3 +8,26 @@ polegada = centímetro x 2,54
 
 '''
 
+# Importando a biblioteca tabulate
+
+from tabulate import tabulate
+
+# Entrada
+
+contadorPolegadas = 1
+tabelaConversao = [
+    ["Polegadas", "Centímetros (cm)"]
+]
+
+# Processamento
+
+while contadorPolegadas <= 20:
+
+    cm = round((contadorPolegadas / 2.54), 2)
+    tabelaConversao += [[contadorPolegadas, cm]]
+
+    contadorPolegadas += 1
+
+# Saída 
+
+print(tabulate(tabelaConversao, headers= 'firstrow', tablefmt='fancy_grid'))

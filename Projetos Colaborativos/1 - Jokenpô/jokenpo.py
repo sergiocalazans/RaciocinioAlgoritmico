@@ -22,22 +22,29 @@ for key, value in modalidades.items():
     print(f"{key}.{value}")
 
 # Entrada da escolha da modalidade
-modo_de_jogo = int(input("\nDigite aqui a modalidade (1, 2 ou 3): "))
+while True: 
+    modo_de_jogo = int(input("\nEscolha a modalidade (1, 2 ou 3): "))
+
+    if not modo_de_jogo in [1,2,3]:
+        print("Modalidade inválida.")
+        continue
+    else:
+        break
+        
 
 print(f"\nModo de jogo: {modalidades[modo_de_jogo]}.")
 
 # Definição dos jogadores
 if modo_de_jogo == 2:
-    jogador = str(input("Defina o nome do jogador 1: "))
-    jogador_2 = str(input("Defina o nome do jogador 2: "))
+    jogador = input("Defina o nome do jogador 1: ")
+    jogador_2 = input("Defina o nome do jogador 2: ")
 
 elif modo_de_jogo == 1:
-    jogador = str(input("Defina o nome do jogador: "))
+    jogador = input("Defina o nome do jogador: ")
     jogador_2 = "Máquina"
-        
+
 elif modo_de_jogo == 3:
-    jogador = "Máquina 1"
-    jogador_2 = "Máquina 2"
+    jogador, jogador_2 = "Máquina 1", "Máquina 2"
 
 print(f"Jogadores: {jogador} e {jogador_2}.\n")
 

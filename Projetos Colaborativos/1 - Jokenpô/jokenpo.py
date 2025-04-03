@@ -1,9 +1,17 @@
 # Jokenpô
 # Pedra, Papel ou Tesoura
 
+# Importando a biblioteca tabulate
+
+from tabulate import tabulate
+
 # Importando a biblioteca random
 
 import random as rd
+
+# Importando a biblioteca getpass
+
+import getpass
 
 # Entrada
 
@@ -88,24 +96,29 @@ def jogar(modo):
         
 def acao_jogador(modo):
 
-    if modo == 3:
-        escolha_jogador = rd.randrange(0, 2)
-        escolha_jogador_2 = rd.randrange(0, 2)
-
-    elif modo == 1:
+    
+    if modo == 1:
         escolha_jogador = int(input("\nDigite uma ação(Pedra, Papel ou Tesoura): "))
         escolha_jogador_2 = rd.randrange(0, 2)
     
+    elif modo == 2:
+        escolha_jogador = int(getpass.getpass(f"\n{jogador}, digite uma ação(Pedra, Papel ou Tesoura): "))
+        escolha_jogador_2 = int(getpass.getpass(f"\n{jogador_2}, digite uma ação(Pedra, Papel ou Tesoura): "))
+
+    else:
+        escolha_jogador = rd.randrange(0, 2)
+        escolha_jogador_2 = rd.randrange(0, 2)
+
     if escolha_jogador == escolha_jogador_2:
         return print("\nEmpate!")
 
     elif (escolha_jogador == 0 and escolha_jogador_2 == 2) or \
             (escolha_jogador == 1 and escolha_jogador_2 == 0) or \
-            (escolha_jogador == 2 and escolha_jogador_2 == 2):
+            (escolha_jogador == 2 and escolha_jogador_2 == 1):
         return print(f"\n{jogador} venceu!")
 
     else:
-        return print(f"\n{jogador_2} perdeu!")
+        return print(f"\n{jogador_2} venceu!")
 
 
 # Saída

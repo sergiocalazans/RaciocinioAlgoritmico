@@ -80,6 +80,7 @@ cont_rodada = 0 # Contador da rodada
 point_jogador = 0 # Pontuação do jogador 1
 point_jogador_2 = 0 # Pontuação do jogador 2
 
+# Função que inicia o jogo
 def iniciar_jogo(modo, contador, p1, p2):
 
     # Exibir as opções e as regras
@@ -90,22 +91,23 @@ def iniciar_jogo(modo, contador, p1, p2):
     
     print("\nRegras: Pedra ganha da tesoura / Tesoura ganha do papel / Papel ganha da pedra\n")
 
-    # Começa o jogo
-    return jogar(modo, contador, p1, p2)
+    # Começa a rodada
+    return rodada(modo, contador, p1, p2)
 
-def jogar(modo, contador, p1, p2):
+# Função da rodada
+def rodada(modo, contador, p1, p2):
 
     while True:
         
-        cont_p1, cont_p2 = acao_jogador(modo, p1, p2)  # Captura os valores atualizados
-        contador = update_tabela(contador, p1, p2)  # Captura a contagem atualizada
+        p1, p2 = acao_jogador(modo, p1, p2)  # Captura os valores atualizados
+        contador = update_placar(contador, p1, p2)  # Captura a contagem atualizada
 
         continuar = int(input("\nDeseja(m) continuar? (1-sim e 2-não) ")) # Pergunta para continuar
 
         if continuar == 2:
             break
     
-    # Exibir tabela
+    # Exibe o placar
     print("\nPlacar\n")
     print(tabulate(placar, tablefmt="fancy_grid"))
 
@@ -142,13 +144,14 @@ def acao_jogador(modo, p1, p2):
     
     return p1, p2  # Retorna os valores atualizados
 
-
-def update_tabela(contador, p1, p2):
+# Função para montar o placar do jogo
+def update_placar(contador, p1, p2):
     contador += 1  # Atualiza o número da rodada
     placar.append([f"{contador}ª", p1, p2])  # Adiciona ao placar
     return contador  # Retorna o contador atualizado
 
 
-# Saída
+# SAÍDA
 
+# Chama a função para iniciar o jokenpô
 iniciar_jogo(modo_de_jogo, cont_rodada, point_jogador, point_jogador_2)

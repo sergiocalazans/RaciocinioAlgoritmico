@@ -66,7 +66,7 @@ escolha_jogador_2 = 0 # Ação do jogador_2
 
 # Lista do Placar
 placar = [
-    ["Rodada", jogador, jogador_2],
+    ["Rodada", jogador, jogador_2]
 ]
 
 cont_rodada = 0 # Contador da rodada
@@ -147,7 +147,6 @@ def update_placar(contador, p1, p2):
     contador += 1  # Atualiza o número da rodada
     placar.append([f"{contador}ª", p1, p2])  # Adiciona ao placar
     return contador  # Retorna o contador atualizado
-
 
 # SAÍDA
 

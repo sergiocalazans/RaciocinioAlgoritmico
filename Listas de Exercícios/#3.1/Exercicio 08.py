@@ -10,7 +10,6 @@ limite = int(input("Digite um número limite: "))
 num_primos = []
 
 # PROCESSAMENTO
-
 for num in range(2, limite + 1):
     primo = True
 

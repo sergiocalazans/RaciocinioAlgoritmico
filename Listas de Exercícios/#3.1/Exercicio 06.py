@@ -7,7 +7,6 @@ dizer se a turma é jovem, adulta ou idosa, conforme a média calculada.
 '''
 
 # ENTRADA
-
 idades = []
 
 while True:
@@ -17,7 +16,6 @@ while True:
         idades.append(idade)
 
 # PROCESSAMENTO
-
 def classificar_turma(lista):
 
     media = sum(lista) / len(lista)

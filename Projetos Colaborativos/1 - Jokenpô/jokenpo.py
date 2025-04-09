@@ -1,16 +1,19 @@
 # Jokenpô
 # Pedra, Papel ou Tesoura
 
-# Importando a biblioteca tabulate
+# Importa a biblioteca tabulate
 from tabulate import tabulate
 
-# Importando a biblioteca random
+# Importa a biblioteca random
 import random as rd
 
-# Importando a biblioteca getpass
+# Importa a biblioteca getpass
 import getpass
 
 # ENTRADA
+
+# Boas-vindas
+print("\nBem-vindo ao Jokenpô! Aqui você jogará Pedra, Papel e Tesoura contra seus oponentes. Escolha uma das modalidades:\n")
 
 # Dicionário das modalidades
 modalidades = {
@@ -18,9 +21,6 @@ modalidades = {
     2: "Humano x Humano",
     3: "Computador x Computador"
 }
-
-# Boas-vindas
-print("\nBem-vindo ao Jokenpô! Aqui você jogará Pedra, Papel e Tesoura contra seus oponentes. Escolha uma das modalidades:\n")
 
 # Laço de repetição da impressão das modalidades
 for key, value in modalidades.items():
@@ -36,21 +36,18 @@ while True:
     else:
         break
 
-# Impressão da modilidade do jogo
+# Impressão da escolha da modalidade do jogo
 print(f"\nModo de jogo: {modalidades[modo_de_jogo]}.")
 
 # Definição dos jogadores
-if modo_de_jogo == 2:
+
+if modo_de_jogo in [1, 2]:
+
     jogador = input("Defina o nome do jogador 1: ")
     jogador_2 = input("Defina o nome do jogador 2: ")
 
-elif modo_de_jogo == 1:
-    jogador = input("Defina o nome do jogador: ")
-    jogador_2 = "Máquina"
-
-elif modo_de_jogo == 3:
+else:
     jogador, jogador_2 = "Máquina 1", "Máquina 2"
-
 
 # Impressão dos jogadores
 print(f"Jogadores: {jogador} e {jogador_2}.\n")
@@ -108,18 +105,19 @@ def rodada(modo, contador, p1, p2):
     print("\nPlacar\n")
     print(tabulate(placar, tablefmt="fancy_grid"))
 
-# ???
+# Função da ação do jogador
 def acao_jogador(modo, p1, p2):
     global escolha_jogador, escolha_jogador_2  # Usa as variáveis globais definidas antes
+    texto = "digite uma ação (Pedra, Papel ou Tesoura):"
 
-    # Seleção dos inputs dos jogadores
+    # Inputs dos jogadores
     if modo == 1:
-        escolha_jogador = int(input("\nDigite uma ação (Pedra, Papel ou Tesoura): "))
+        escolha_jogador = int(input(f"\n{jogador}, {texto} "))
         escolha_jogador_2 = rd.randrange(0, 3)
     
     elif modo == 2:
-        escolha_jogador = int(getpass.getpass(f"\n{jogador}, digite uma ação (Pedra, Papel ou Tesoura): "))
-        escolha_jogador_2 = int(getpass.getpass(f"\n{jogador_2}, digite uma ação (Pedra, Papel ou Tesoura): "))
+        escolha_jogador = int(getpass.getpass(f"\n{jogador}, {texto} "))
+        escolha_jogador_2 = int(getpass.getpass(f"\n{jogador_2}, {texto} "))
 
     else:
         escolha_jogador = rd.randrange(0, 3)
@@ -127,6 +125,8 @@ def acao_jogador(modo, p1, p2):
 
     # Lógica do jogo
     if escolha_jogador == escolha_jogador_2:
+        p1 += 1
+        p2 += 1
         print("\nEmpate!")
 
     elif (escolha_jogador == 0 and escolha_jogador_2 == 2) or \

@@ -32,17 +32,17 @@ def calculos(lista):
     soma_pares = []
     soma_impares = []
 
-    for num in lista:
+    for item in lista:
 
         if num % 2 == 0:
-            soma_pares += [num]
+            soma_pares += [item]
         else:
-            soma_impares += [num]
+            soma_impares += [item]
     
     soma_pares = sum(soma_pares)
     soma_impares = sum(soma_impares) 
 
-    amp_amostral = list_num[-1] - list_num[0]
+    amp_amostral = max(list_num) - min(list_num)
 
     print(f"\nA soma total dos números é: {soma};")
     print(f"A soma dos pares é {soma_pares} e dos ímpares é {soma_impares};")

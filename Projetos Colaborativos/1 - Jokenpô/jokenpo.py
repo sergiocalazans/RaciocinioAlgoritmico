@@ -13,7 +13,7 @@ import random as rd
 
 import getpass
 
-# Entrada
+# ENTRADA
 
 # Dicionário das modalidades
 modalidades = {
@@ -38,7 +38,8 @@ while True:
         continue
     else:
         break
-        
+
+# Impressão da modilidade do jogo
 print(f"\nModo de jogo: {modalidades[modo_de_jogo]}.")
 
 # Definição dos jogadores
@@ -53,9 +54,11 @@ elif modo_de_jogo == 1:
 elif modo_de_jogo == 3:
     jogador, jogador_2 = "Máquina 1", "Máquina 2"
 
+
+# Impressão dos jogadores
 print(f"Jogadores: {jogador} e {jogador_2}.\n")
 
-# Processamento
+# PROCESSAMENTO
 
 # Dicionário das ações
 acoes = {
@@ -68,15 +71,16 @@ acoes = {
 escolha_jogador = 0 # Ação do jogador
 escolha_jogador_2 = 0 # Ação do jogador_2
 
+# Lista do Placar
 placar = [
     ["Rodada", jogador, jogador_2],
 ]
 
-cont_rodada = 0
-cont_jogador = 0
-cont_jogador_2 = 0
+cont_rodada = 0 # Contador da rodada
+point_jogador = 0 # Pontuação do jogador 1
+point_jogador_2 = 0 # Pontuação do jogador 2
 
-def iniciar_jogo(modo, contador, cont_p1, cont_p2):
+def iniciar_jogo(modo, contador, p1, p2):
 
     # Exibir as opções e as regras
     if modo != 3:
@@ -87,16 +91,16 @@ def iniciar_jogo(modo, contador, cont_p1, cont_p2):
     print("\nRegras: Pedra ganha da tesoura / Tesoura ganha do papel / Papel ganha da pedra\n")
 
     # Começa o jogo
-    return jogar(modo, contador, cont_p1, cont_p2)
+    return jogar(modo, contador, p1, p2)
 
-def jogar(modo, contador, cont_p1, cont_p2):
+def jogar(modo, contador, p1, p2):
 
     while True:
         
-        cont_p1, cont_p2 = acao_jogador(modo, cont_p1, cont_p2)  # Captura os valores atualizados
-        contador = update_tabela(contador, cont_p1, cont_p2)  # Captura a contagem atualizada
+        cont_p1, cont_p2 = acao_jogador(modo, p1, p2)  # Captura os valores atualizados
+        contador = update_tabela(contador, p1, p2)  # Captura a contagem atualizada
 
-        continuar = int(input("\nDeseja(m) continuar? (1-sim e 2-não) "))
+        continuar = int(input("\nDeseja(m) continuar? (1-sim e 2-não) ")) # Pergunta para continuar
 
         if continuar == 2:
             break
@@ -106,7 +110,7 @@ def jogar(modo, contador, cont_p1, cont_p2):
     print(tabulate(placar, tablefmt="fancy_grid"))
 
 
-def acao_jogador(modo, cont_p1, cont_p2):
+def acao_jogador(modo, p1, p2):
     global escolha_jogador, escolha_jogador_2  # Usa as variáveis globais definidas antes
 
     # Seleção dos inputs dos jogadores
@@ -129,22 +133,22 @@ def acao_jogador(modo, cont_p1, cont_p2):
     elif (escolha_jogador == 0 and escolha_jogador_2 == 2) or \
          (escolha_jogador == 1 and escolha_jogador_2 == 0) or \
          (escolha_jogador == 2 and escolha_jogador_2 == 1):
-        cont_p1 += 1
+        p1 += 1
         print(f"\n{jogador} venceu!")
 
     else:
-        cont_p2 += 1
+        p2 += 1
         print(f"\n{jogador_2} venceu!")
     
-    return cont_p1, cont_p2  # Retorna os valores atualizados
+    return p1, p2  # Retorna os valores atualizados
 
 
-def update_tabela(contador, cont_1, cont_2):
+def update_tabela(contador, p1, p2):
     contador += 1  # Atualiza o número da rodada
-    placar.append([f"{contador}ª", cont_1, cont_2])  # Adiciona ao placar
+    placar.append([f"{contador}ª", p1, p2])  # Adiciona ao placar
     return contador  # Retorna o contador atualizado
 
 
 # Saída
 
-iniciar_jogo(modo_de_jogo, cont_rodada, cont_jogador, cont_jogador_2)
+iniciar_jogo(modo_de_jogo, cont_rodada, point_jogador, point_jogador_2)

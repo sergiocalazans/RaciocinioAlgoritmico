@@ -2,15 +2,12 @@
 # Pedra, Papel ou Tesoura
 
 # Importando a biblioteca tabulate
-
 from tabulate import tabulate
 
 # Importando a biblioteca random
-
 import random as rd
 
 # Importando a biblioteca getpass
-
 import getpass
 
 # ENTRADA
@@ -67,7 +64,6 @@ acoes = {
         2: "Tesoura"
     }
 
-
 escolha_jogador = 0 # Ação do jogador
 escolha_jogador_2 = 0 # Ação do jogador_2
 
@@ -83,12 +79,13 @@ point_jogador_2 = 0 # Pontuação do jogador 2
 # Função que inicia o jogo
 def iniciar_jogo(modo, contador, p1, p2):
 
-    # Exibir as opções e as regras
+    # Exibe as opções de jogada
     if modo != 3:
         print("Opções: \n")
         for key, value in acoes.items():
             print(f"Digite {key} para {value}")
     
+    # Exibe as regras do jogo
     print("\nRegras: Pedra ganha da tesoura / Tesoura ganha do papel / Papel ganha da pedra\n")
 
     # Começa a rodada
@@ -111,7 +108,7 @@ def rodada(modo, contador, p1, p2):
     print("\nPlacar\n")
     print(tabulate(placar, tablefmt="fancy_grid"))
 
-
+# ???
 def acao_jogador(modo, p1, p2):
     global escolha_jogador, escolha_jogador_2  # Usa as variáveis globais definidas antes
 
@@ -144,8 +141,9 @@ def acao_jogador(modo, p1, p2):
     
     return p1, p2  # Retorna os valores atualizados
 
-# Função para montar o placar do jogo
+# Função para atualizar o placar do jogo
 def update_placar(contador, p1, p2):
+
     contador += 1  # Atualiza o número da rodada
     placar.append([f"{contador}ª", p1, p2])  # Adiciona ao placar
     return contador  # Retorna o contador atualizado

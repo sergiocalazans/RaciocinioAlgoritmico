@@ -74,7 +74,7 @@ point_jogador = 0 # Pontuação do jogador 1
 point_jogador_2 = 0 # Pontuação do jogador 2
 
 # Função que inicia o jogo
-def iniciar_jogo(modo, contador, p1, p2):
+def iniciar_jogo(modo, contador, p1, p2): # p1 - Pontuação do jogador 1 e p2 - Pontuação do jogador 2
 
     # Exibe as opções de jogada
     if modo != 3:
@@ -102,7 +102,8 @@ def rodada(modo, contador, p1, p2):
             break
     
     # Exibe o placar
-    print("\nPlacar\n")
+    print(f"\nResultado: {definir_ganhador(p1, p2)}")
+    print("\nPlacar")
     print(tabulate(placar, tablefmt="fancy_grid"))
 
 # Função da ação do jogador
@@ -147,6 +148,18 @@ def update_placar(contador, p1, p2):
     contador += 1  # Atualiza o número da rodada
     placar.append([f"{contador}ª", p1, p2])  # Adiciona ao placar
     return contador  # Retorna o contador atualizado
+
+# Função para definir o ganhador
+def definir_ganhador(p1, p2):
+
+    global jogador, jogador_2
+
+    if p1 == p2:
+        print(f"empate.")
+    elif p1 > p2:
+        print(f"o jogador {jogador} ganhou.")
+    else:
+        print(f"o jogador {jogador_2} ganhou.")
 
 # SAÍDA
 

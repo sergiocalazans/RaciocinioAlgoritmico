@@ -70,8 +70,8 @@ def definir_jogadores(modo):
 
     # Dicionário dos jogadores
     jogadores = {
-        1: ["", 0, 0],  # [Nome, Escolha, Pontos]
-        2: ["", 0, 0]
+        1: ["", 0],  # [Nome, Pontos]
+        2: ["", 0]
     }
 
     # Condição: se o modo é um valor da lista, defini os nomes dos jogadores.
@@ -101,79 +101,93 @@ def rodada(modo, jogadores):
     while True:
 
         contador += 1 # Atualiza a rodada
-        print(f"\n----{contador}ª Rodada----")
-        jogar(modo, jogadores)
-        placar.append([f"{contador}ª", jogadores[1][2], jogadores[2][2]])
+        print(f"\n----{contador}ª Rodada----") # Imprimi a rodada referente
+        jogar(modo, jogadores) # Chama a função para jogar
 
+        # Atualiza o placar
+        placar.append([f"{contador}ª", jogadores[1][1], jogadores[2][1]])
+
+        # Pergunta para continuar 
         continuar = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower()
         
-        while continuar not in ["n", "s"]:
+        # Defini continuar como o valor retornado de veficador
+        continuar = verificador(continuar)
 
-            print("\nValor Inválido!")
-            continuar = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower()
+        # Condição: se continuar for falso, chama encerrar e para o loop WHILE
+        if not continuar:
+            encerrar(jogadores, placar)
+            break
+        
+    
+def verificador(valor):
 
-            if continuar == "n":
-                encerrar(jogadores, placar)
-                return False
-            else:
-                break
-            
+    while valor not in ["n", "s"]:
+
+        print("\nValor Inválido!")
+        valor = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower()
+
+    if valor == "n":
+        return False
+    elif valor == "s":
+        return True
 
 
 # Função para realizar a jogada
 def jogar(modo, jogadores):
 
     texto = "escolha (0: Pedra, 1: Papel, 2: Tesoura): "
+    escolha_1 = None
+    escolha_2 = None
 
     while True:
 
         try:
             if modo == 1:
-                jogadores[1][1] = int(input(f"\n{jogadores[1][0]}, {texto}"))
-                
-                if jogadores[1][1] not in acoes:
+                escolha_1 = int(input(f"\n{jogadores[1][0]}, {texto}"))
+                if escolha_1 not in acoes:
                     raise ValueError
                 
-                jogadores[2][1] = rd.randint(0, 2)
+                escolha_2 = rd.randint(0, 2)
 
             elif modo == 2:
-                jogadores[1][1] = int(getpass.getpass(f"\n{jogadores[1][0]}, {texto}"))
-                jogadores[2][1] = int(getpass.getpass(f"\n{jogadores[2][0]}, {texto}"))
+                escolha_1 = int(getpass.getpass(f"\n{jogadores[1][0]}, {texto}"))
+                escolha_2 = int(getpass.getpass(f"\n{jogadores[2][0]}, {texto}"))
                 
-                if jogadores[1][1] not in acoes or jogadores[2][1] not in acoes:
+                if escolha_1 not in acoes or escolha_2 not in acoes:
                     raise ValueError
                 
             else:
-                jogadores[1][1] = rd.randint(0, 2)
-                jogadores[2][1] = rd.randint(0, 2)
+                escolha_1 = rd.randint(0, 2)
+                escolha_2 = rd.randint(0, 2)
+
             break
 
         except ValueError:
             print("Entrada inválida! Escolha 0, 1 ou 2.")
 
-    print(f"\n{jogadores[1][0]} escolheu {acoes[jogadores[1][1]]}")
-    print(f"{jogadores[2][0]} escolheu {acoes[jogadores[2][1]]}")
+    print(f"\n{jogadores[1][0]} escolheu {acoes[escolha_1]}")
+    print(f"{jogadores[2][0]} escolheu {acoes[escolha_2]}")
 
-    if jogadores[1][1] == jogadores[2][1]:
+    if escolha_1 == escolha_2:
         print("\nEmpate!")
 
-    elif (jogadores[1][1] == 0 and jogadores[2][1] == 2) or \
-         (jogadores[1][1] == 1 and jogadores[2][1] == 0) or \
-         (jogadores[1][1] == 2 and jogadores[2][1] == 1):
-        jogadores[1][2] += 1
+    elif (escolha_1 == 0 and escolha_2 == 2) or \
+         (escolha_1 == 1 and escolha_2 == 0) or \
+         (escolha_1 == 2 and escolha_2 == 1):
+        jogadores[1][1] += 1
         print(f"\n{jogadores[1][0]} venceu!")
 
     else:
-        jogadores[2][2] += 1
+        jogadores[2][1] += 1
         print(f"\n{jogadores[2][0]} venceu!")
 
 # Função para encerrar o jogo e mostrar o placar
 def encerrar(jogadores, placar):
 
-    if jogadores[1][2] == jogadores[2][2]:
+    if jogadores[1][1] == jogadores[2][1]:
         resultado = "Empate."
 
-    elif jogadores[1][2] > jogadores[2][2]:
+    elif jogadores[1][1] > jogadores[2][1]:
         resultado = f"{jogadores[1][0]} ganhou!"
 
     else:

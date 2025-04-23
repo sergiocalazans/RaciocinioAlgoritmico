@@ -113,7 +113,7 @@ def rodada(modo, jogadores):
         # Defini continuar como o valor retornado de veficador
         continuar = verificador(continuar)
 
-        # Condição: se continuar for falso, chama encerrar e para o loop WHILE
+        # Condição: se continuar for falso, chama a função encerrar e encerra o loop WHILE
         if not continuar:
             encerrar(jogadores, placar)
             break

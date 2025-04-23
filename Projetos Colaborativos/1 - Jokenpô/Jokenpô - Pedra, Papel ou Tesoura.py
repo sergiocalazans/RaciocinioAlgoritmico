@@ -116,7 +116,7 @@ def rodada(modo, jogadores):
         # Pergunta para continuar 
         continuar = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower()
         
-        # Defini continuar como o valor retornado de veficador
+        # Defini continuar como o valor retornado de verificador
         continuar = verificador(continuar)
 
         # Condição: se continuar for falso, chama a função encerrar e encerra o loop WHILE
@@ -127,6 +127,7 @@ def rodada(modo, jogadores):
 # Função para verificar se o jogo continua
 def verificador(valor):
 
+    # Loop WHILE, se encerra quando o valor for n ou s
     while valor not in ["n", "s"]:
 
         print("\nValor Inválido!")

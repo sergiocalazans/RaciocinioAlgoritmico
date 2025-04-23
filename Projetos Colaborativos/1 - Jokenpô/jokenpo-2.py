@@ -118,7 +118,7 @@ def rodada(modo, jogadores):
             encerrar(jogadores, placar)
             break
         
-    
+# Função para verificar se o jogo continua
 def verificador(valor):
 
     while valor not in ["n", "s"]:

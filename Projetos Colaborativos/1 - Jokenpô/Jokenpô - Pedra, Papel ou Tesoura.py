@@ -4,6 +4,12 @@ import random as rd # Biblioteca para importar números aleatórios
 import getpass # Biblioteca para ocultar a resposta do input no terminal
 from tabulate import tabulate # Biblioteca para criar tabelas no terminal
 
+# Jokenpô - Pedra, Papel ou Tesoura
+
+import random as rd # Biblioteca para importar números aleatórios
+import getpass # Biblioteca para ocultar a resposta do input no terminal
+from tabulate import tabulate # Biblioteca para criar tabelas no terminal
+
 # Dicionário das modalidades
 modalidades = {
     1: "Humano x Computador",
@@ -34,7 +40,7 @@ def iniciar():
     if modo != 3:
         print("Opções:")
 
-        # Loop FOR para percorrer o dicionário acoes e imprimir cada opção
+        # Loop FOR para percorrer o dic. acoes e imprimir cada opção
         for key, value in acoes.items():
             print(f"Digite {key} para {value}")
 
@@ -44,7 +50,7 @@ def iniciar():
 # Função para escolher o modo de jogo
 def escolher_modo():
 
-    # Loop FOR para percorrer dicionário das modalidades para imprimir cada modalidade
+    # Loop FOR para percorrer dic. modalidades para imprimir cada modalidade
     for key, value in modalidades.items():
         print(f"{key}. {value}")
 
@@ -84,7 +90,7 @@ def definir_jogadores(modo):
     else:
         jogadores[1][0], jogadores[2][0] = "Máquina 1", "Máquina 2"
 
-    # Imprimi os nomes dos jogadores com separação de linhas
+    # Imprimi os nomes dos jogadores
     print(f"\nJogadores: {jogadores[1][0]} e {jogadores[2][0]}.\n")
 
     return jogadores # Retorna jogadores
@@ -110,7 +116,7 @@ def rodada(modo, jogadores):
         # Pergunta para continuar 
         continuar = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower()
         
-        # Define continuar como o valor retornado de veficador
+        # Defini continuar como o valor retornado de veficador
         continuar = verificador(continuar)
 
         # Condição: se continuar for falso, chama a função encerrar e encerra o loop WHILE
@@ -118,6 +124,19 @@ def rodada(modo, jogadores):
             encerrar(jogadores, placar)
             break
         
+# Função para verificar se o jogo continua
+def verificador(valor):
+
+    while valor not in ["n", "s"]:
+
+        print("\nValor Inválido!")
+        valor = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower()
+
+    if valor == "n":
+        return False
+    elif valor == "s":
+        return True
+
 # Função para verificar se o jogo continua
 def verificador(valor):
 

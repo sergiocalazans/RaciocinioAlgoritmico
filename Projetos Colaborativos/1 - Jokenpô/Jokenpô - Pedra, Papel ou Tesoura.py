@@ -4,12 +4,6 @@ import random as rd # Biblioteca para importar números aleatórios
 import getpass # Biblioteca para ocultar a resposta do input no terminal
 from tabulate import tabulate # Biblioteca para criar tabelas no terminal
 
-# Jokenpô - Pedra, Papel ou Tesoura
-
-import random as rd # Biblioteca para importar números aleatórios
-import getpass # Biblioteca para ocultar a resposta do input no terminal
-from tabulate import tabulate # Biblioteca para criar tabelas no terminal
-
 # Dicionário das modalidades
 modalidades = {
     1: "Humano x Computador",

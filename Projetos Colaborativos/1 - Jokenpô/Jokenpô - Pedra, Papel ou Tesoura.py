@@ -150,7 +150,9 @@ def verificador(valor):
 def jogar(modo, jogadores):
 
     texto = "escolha (0: Pedra, 1: Papel, 2: Tesoura): " 
-    escolha_1 = None # as escolhas de cada jogador são iniciadas
+    
+    # as escolhas de cada jogador são iniciadas
+    escolha_1 = None 
     escolha_2 = None
 
     while True:
@@ -179,9 +181,10 @@ def jogar(modo, jogadores):
         except ValueError:
             print("Entrada inválida! Escolha 0, 1 ou 2.")
 
-    print(f"\n{jogadores[1][0]} escolheu {acoes[escolha_1]}")
-    print(f"{jogadores[2][0]} escolheu {acoes[escolha_2]}")
+    print(f"\n{jogadores[1][0]} escolheu {acoes[escolha_1]}") # Escolha do jogador 1
+    print(f"{jogadores[2][0]} escolheu {acoes[escolha_2]}") # Escolha do jogador 2
 
+    # Lógica do jogo
     if escolha_1 == escolha_2:
         print("\nEmpate!")
 

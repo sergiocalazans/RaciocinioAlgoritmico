@@ -77,10 +77,10 @@ def definir_jogadores(modo):
     # Condição: se o modo é um valor da lista, defini os nomes dos jogadores.
     # Se não, os nomes dos jogadores 1 e 2 é: máquina 1 e máquina 2, respectivamente.
     if modo in [1, 2]:
-        jogadores[1][0] = input("Defina o nome do jogador 1: ")
+        jogadores[1][0] = input("Defina o nome do jogador 1: ").strip().lower()
 
         # Condição: se o modo é igual a 2, defini o nome do jogador 2 como "Computador"
-        jogadores[2][0] = input("Defina o nome do jogador 2: ") if modo == 2 else "Computador"
+        jogadores[2][0] = input("Defina o nome do jogador 2: ").strip().lower() if modo == 2 else "Computador"
     else:
         jogadores[1][0], jogadores[2][0] = "Máquina 1", "Máquina 2"
 

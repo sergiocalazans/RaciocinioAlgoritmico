@@ -117,20 +117,6 @@ def rodada(modo, jogadores):
         if not continuar:
             encerrar(jogadores, placar)
             break
-        
-# Função para verificar se o jogo continua
-def verificador(valor):
-
-    # Loop WHILE, se encerra quando o valor for n ou s
-    while valor not in ["n", "s"]:
-
-        print("\nValor Inválido!")
-        valor = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower()
-
-    if valor == "n":
-        return False
-    elif valor == "s":
-        return True
 
 # Função para verificar se o jogo continua
 def verificador(valor):
@@ -145,12 +131,11 @@ def verificador(valor):
     elif valor == "s":
         return True
 
-
 # Função para realizar a jogada
 def jogar(modo, jogadores):
 
     texto = "escolha (0: Pedra, 1: Papel, 2: Tesoura): " 
-    
+
     # as escolhas de cada jogador são iniciadas
     escolha_1 = None 
     escolha_2 = None

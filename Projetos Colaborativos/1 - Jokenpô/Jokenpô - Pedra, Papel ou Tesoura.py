@@ -34,7 +34,7 @@ def iniciar():
     if modo != 3:
         print("Opções:")
 
-        # Loop FOR para percorrer o dic. acoes e imprimir cada opção
+        # Laço FOR para percorrer o dic. acoes e imprimir cada opção
         for key, value in acoes.items():
             print(f"Digite {key} para {value}")
 
@@ -44,7 +44,7 @@ def iniciar():
 # Função para escolher o modo de jogo
 def escolher_modo():
 
-    # Loop FOR para percorrer dic. modalidades para imprimir cada modalidade
+    # Laço FOR para percorrer dic. modalidades para imprimir cada modalidade
     for key, value in modalidades.items():
         print(f"{key}. {value}")
 
@@ -108,7 +108,7 @@ def rodada(modo, jogadores):
         placar.append([f"{contador}ª", jogadores[1][1], jogadores[2][1]])
 
         # Pergunta para continuar 
-        continuar = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower()
+        continuar = input("\nDeseja(m) continuar? (s para sim ou n para não): ").strip().lower()
         
         # Defini continuar como o valor retornado de verificador
         continuar = verificador(continuar)
@@ -124,7 +124,7 @@ def verificador(valor):
     while valor not in ["n", "s"]: # enquanto o valor colocado pelo usuário for diferente dos ultilizados na execução
 
         print("\nValor Inválido!")
-        valor = input("\nDeseja continuar? (s para sim ou n para não): ").strip().lower() # pergunta ao usuário se quer continuar o jogo
+        valor = input("\nDeseja(m) continuar? (s para sim ou n para não): ").strip().lower() # pergunta ao usuário se quer continuar o jogo
 
     if valor == "n":
         return False # se for falso, o loop quebrará e encerrará o jogo

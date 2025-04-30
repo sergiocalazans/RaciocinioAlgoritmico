@@ -200,3 +200,7 @@ def encerrar(jogadores, placar):
 
 # Executa o jogo
 iniciar()
+
+# Agradecimentos
+print("\n Obrigado por jogar!")
+print("\n Desenvolvido por: Libia Silveira, Pedro Fonseca e Sérgio Calazans.\n")

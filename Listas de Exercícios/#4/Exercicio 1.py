@@ -9,7 +9,6 @@ from tabulate import tabulate # Biblioteca para criar tabelas no terminal
 # Entrada
 
 tabela = [["Mutiplicação", "Resultado"]]
-contador = 0
 
 # Processamento
 

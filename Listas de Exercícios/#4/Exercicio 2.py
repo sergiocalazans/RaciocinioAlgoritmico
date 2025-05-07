@@ -22,9 +22,11 @@ while i <= 10:
         
         contador = 0
         i += 1
+        tabela.append(["", ""])
     
     contador += 1
 
 # Saída
+tabela.pop(-1)
 print(f"\n\n{tabulate(tabela, headers="firstrow", tablefmt="fancy_grid")}") 
 print("\nPrograma encerrou.")

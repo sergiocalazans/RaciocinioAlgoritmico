@@ -6,23 +6,31 @@
 
 from tabulate import tabulate # Biblioteca para criar tabelas no terminal
 
-# Entrada
+# Entrada e Processamentos
 
-tabela = [["Mutiplicação", "Resultado"]]
+# Função para montar cada tabela
+def tabela(i, x):
 
-# Processamento
+    tabela = [["Mutiplicação", "Resultado"]]
 
-def calcular_tabela(tabela):
+    for valor in x:
 
-    for valor in range(1, 11):
+        tabela.append([f"{i}x{valor}", (i * valor)])
 
-        tabela.append([f"1x{valor}", (1 * valor)])
+    print(f"\n\n{tabulate(tabela, headers="firstrow", tablefmt="fancy_grid")}")
+    
+# Função para imprimir cada tabela
+def imprimir_tabelas():
 
-    print(tabulate(tabela, headers="firstrow", tablefmt="fancy_grid"))
+    contador = 1
+    intervalo = range(1, 11)
+
+    while contador <= 10:
+
+        tabela(contador, intervalo)
+        contador += 1 
 
 # Saída
 
-calcular_tabela(tabela)
-
-
-
+imprimir_tabelas()
+print("\nPrograma encerrou.")

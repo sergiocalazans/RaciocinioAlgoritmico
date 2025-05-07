@@ -11,7 +11,7 @@ lista = []
 
 while contador <= 3:
 
-    num = int(input("\nDigite um número: "))
+    num = int(input("\nDigite um número inteiro: "))
     lista.append(num)
     contador += 1
 

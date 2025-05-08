@@ -20,17 +20,17 @@ def tabela(i, x):
     print(f"\n\n{tabulate(tabela, headers="firstrow", tablefmt="fancy_grid")}")
     
 # Função para imprimir cada tabela
-def imprimir_tabelas():
+def imprimir_tabelas(qtd):
 
     contador = 1
     intervalo = range(1, 11)
 
-    while contador <= 10:
+    while contador <= qtd:
 
         tabela(contador, intervalo)
         contador += 1 
 
 # Saída
 
-imprimir_tabelas()
+imprimir_tabelas(10)
 print("\nPrograma encerrou.")

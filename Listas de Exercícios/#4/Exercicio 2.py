@@ -8,25 +8,26 @@ from tabulate import tabulate # Biblioteca para criar tabelas no terminal
 
 # Entrada
 
-i = 1
-contador = 1
-tabela = [["Mutiplicação", "Resultado"]]
+i = 1 # Contador i
+x = 1 # Contador x
+tabela = [["Mutiplicação", "Resultado"]] # Lista que monta a tabela
+qtd = 10 # Quantidade de tabelas
 
 # Processamento
 
-while i <= 10:
+while i <= qtd:
 
-    tabela.append([f"{i}x{contador}", (i * contador)])
+    tabela.append([f"{i}x{x}", (i * x)])
 
     if tabela[-1][1] == i * 10:
         
-        contador = 0
+        x = 0
         i += 1
         tabela.append(["", ""])
     
-    contador += 1
+    x += 1
 
 # Saída
-tabela.pop(-1)
-print(f"\n\n{tabulate(tabela, headers="firstrow", tablefmt="fancy_grid")}") 
+tabela.pop(-1) # Exclui a última linha em branco da tabela
+print(f"\n\n{tabulate(tabela, headers="firstrow", tablefmt="fancy_grid")}") # Imprimi a tabela
 print("\nPrograma encerrou.")

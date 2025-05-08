@@ -7,23 +7,25 @@ Exemplo: 120 é triangular, pois 4.5.6 = 120. Dado um inteiro não-negativo n, v
 
 # Entrada
 num = int(input("\nDigite um número inteiro: "))
-i = 1 # Contador
-triangular = [] # Números traingulares
+i = [] #
+x = 1
+triangular = [] # Números triangulares
 
 # Processamento e Saída
 
-while True:
+while i <= num:
 
-    triangular.append((i * (i + 1)) // 2)
-    i += 1
-
+    triangular.append((x * (x + 1)) // 2)
+    x += 1
+    i.append(triangular[-1])
+    
     if num in triangular:
         print("\né triangular")
         break
-    
-    elif num > triangular[-1]:
-        print("\nnão é triangular")
-        break
+
+
+if num not in triangular:
+    print("\nnão é triangular")
 
 print(triangular)
     

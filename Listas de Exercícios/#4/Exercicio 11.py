@@ -8,8 +8,9 @@ Em seguida, obtenha a aposta do usuário (sem repetição) e indique quantos ace
 
 from random import randint
 
-# Entrada
+# Entrada e Processamento
 mega_aposta = []
+
 while len(mega_aposta) < 6:
     numero = randint(1, 60)
     if numero not in mega_aposta:
@@ -17,6 +18,7 @@ while len(mega_aposta) < 6:
 
 usuario_aposta = []
 print("\nDigite sua aposta com 6 números entre 1 e 60 (sem repetir):\n")
+
 while len(usuario_aposta) < 6:
     try:
         entrada = int(input(f"Número {len(usuario_aposta) + 1}: "))
@@ -29,8 +31,8 @@ while len(usuario_aposta) < 6:
     except ValueError:
         print("Entrada inválida. Digite um número inteiro.")
 
-# Processamento
 acertos = 0
+
 for numero in usuario_aposta:
     if numero in mega_aposta:
         acertos += 1

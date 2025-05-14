@@ -12,9 +12,9 @@ from random import randint
 mega_aposta = []
 
 while len(mega_aposta) < 6:
-    numero = randint(1, 60)
-    if numero not in mega_aposta:
-        mega_aposta.append(numero)
+    num = randint(1, 60)
+    if num not in mega_aposta:
+        mega_aposta.append(num)
 
 usuario_aposta = []
 print("\nDigite sua aposta com 6 números entre 1 e 60 (sem repetir):\n")
@@ -33,8 +33,8 @@ while len(usuario_aposta) < 6:
 
 acertos = 0
 
-for numero in usuario_aposta:
-    if numero in mega_aposta:
+for valor in usuario_aposta:
+    if valor in mega_aposta:
         acertos += 1
 
 # Saída

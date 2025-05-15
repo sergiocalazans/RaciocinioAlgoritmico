@@ -16,7 +16,7 @@ dMatriz = []
 def criarMatrizes(matriz): 
 
     j = 1
-    matriz_original = matriz()
+    matriz_original = matriz(5, 5)
 
     for linha in matriz_original:
                 
@@ -42,11 +42,9 @@ def criarMatrizes(matriz):
                   j = 0
                   imprimirMatriz(matriz)
 
-def matriz():
+def matriz(qtdColunas, qtdLinhas):
      
     matriz = []
-    qtdColunas = 5
-    qtdLinhas = 5
 
     while len(matriz) <= qtdLinhas:
 

@@ -53,8 +53,10 @@ def matriz(tipo, nMatriz):
 
     print(f"Soma dos elementos hachurados: {soma}\n{'-'*40}")
 
+# Criando a matriz de base
 matriz_original = criar_matriz(qtdLinhas, qtdColunas)
 
+# Imprimindo as matrizes específicas
 matriz('a', matriz_original)
 matriz('b', matriz_original)
 matriz('c', matriz_original)

@@ -13,34 +13,33 @@ bMatriz = []
 cMatriz = []
 dMatriz = []
 
-def criarMatrizes(matriz): 
+def criarMatrizes(matriz, i): 
 
     j = 1
+    lista = []
+    valor = None
     matriz_original = matriz(5, 5)
 
-    for linha in matriz_original:
+    if i == 0:
+        for linha in matriz_original:
                 
-            lista = []
-            valor = None
+                if j == 3:
+                    valor = 0
 
-            if j == 3:
-                valor = 0
-
-            for elemento in linha:
+                for elemento in linha:
+                    if valor == 0:
+                        lista.append(str(elemento))
+                    elif elemento == linha[2]:
+                        lista.append(str(elemento))
+                    else:
+                        lista.append(str(0).zfill(2))
                 
-                if valor == 0:
-                    lista.append(str(elemento))
-                elif elemento == linha[2]:
-                    lista.append(str(elemento))
-                else:
-                    lista.append(str(0).zfill(2))
-            
-            matriz.append(lista)
-            j += 1
+                matriz.append(lista)
+                j += 1
 
-            if len(matriz) == 5:
-                  j = 0
-                  imprimirMatriz(matriz)
+    if len(matriz) == 5:
+        j = 0
+        imprimirMatriz(matriz)
 
 def matriz(qtdColunas, qtdLinhas):
      
@@ -66,7 +65,7 @@ def imprimirMatriz(matriz):
         print()
      
 print("\nMatriz: A")
-criarMatrizes(aMatriz)
+criarMatrizes(aMatriz, 0)
 
     
 

@@ -45,11 +45,9 @@ def filtrar_matriz(matriz, tipo):
         filtrada.append(linha)
     return filtrada, soma
 
-def matriz(tipo):
-    
-    global matriz_original
+def matriz(tipo, nMatriz):
 
-    filtrada, soma = filtrar_matriz(matriz_original, tipo)
+    filtrada, soma = filtrar_matriz(nMatriz, tipo)
     print(f"Matriz {tipo.upper()}:")
     imprimir_matriz(filtrada)
 
@@ -57,7 +55,7 @@ def matriz(tipo):
 
 matriz_original = criar_matriz(qtdLinhas, qtdColunas)
 
-matriz('a')
-matriz('b')
-matriz('c')
-matriz('d')
+matriz('a', matriz_original)
+matriz('b', matriz_original)
+matriz('c', matriz_original)
+matriz('d', matriz_original)

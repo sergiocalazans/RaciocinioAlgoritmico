@@ -12,11 +12,11 @@ produtos = [
 def obter_produto(matriz, indice):
     return matriz[indice]
 
-def selecionar_qtd(lista):
+def selecionar_qtd(vetor):
 
-    produto = str(lista[1])
-    valor = float(lista[2])
-    estoque = int(lista[3])
+    produto = str(vetor[1])
+    valor = float(vetor[2])
+    estoque = int(vetor[3])
 
     if estoque == 0:
         print("\nEstoque do produto não disponível.")

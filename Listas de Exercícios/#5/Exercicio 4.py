@@ -1,4 +1,4 @@
-# Exercício 5
+# Exercício 4
 
 '''
 4.	Escreva um programa que preencha uma matriz quadrada de números inteiros de dimensão (5x5) 

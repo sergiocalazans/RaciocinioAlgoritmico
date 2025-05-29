@@ -1,14 +1,5 @@
 from tabulate import tabulate
 
-produtos = [
-    ["ID", "Bebida", "Preço", "Estoque"],
-    [1, "Coca-cola", 3.75, 2],
-    [2, "Pepsi", 3.67, 5],
-    [3, "Monster", 9.96, 1],
-    [4, "Café", 1.25, 100],
-    [5, "Redbull", 13.99, 2]
-]
-
 def obter_produto(matriz, indice):
     return matriz[indice]
 
@@ -83,6 +74,15 @@ def verificador():
         return False # se for falso, o loop quebrará e encerrará o programa
     else:
         return True
+
+produtos = [
+    ["ID", "Bebida", "Preço", "Estoque"],
+    [1, "Coca-cola", 3.75, 2],
+    [2, "Pepsi", 3.67, 5],
+    [3, "Monster", 9.96, 1],
+    [4, "Café", 1.25, 100],
+    [5, "Redbull", 13.99, 2]
+]
 
 print(tabulate(produtos, headers="firstrow", tablefmt="fancy_grid"))
 

@@ -21,7 +21,7 @@ def selecionar_qtd(vetor):
     if estoque == 0:
         print("\nEstoque do produto não disponível.")
     else:
-        print(f"\nO produto {produto} custa R${valor} com estoque de {estoque}.")
+        print(f"\nO produto {produto} custa R${str(valor).replace('.', ',')} com estoque de {estoque}.")
 
     while True:
 
@@ -41,7 +41,7 @@ def pagar(produto, valor, qtd):
     calculo = valor * qtd
     valor = round(calculo, 2)
 
-    print(f"\nO valor do pagamento da(s) bebida(s) do produto {produto} é: R${valor}")
+    print(f"\nO valor do pagamento da(s) bebida(s) do produto {produto} é: R${str(valor).replace('.', ',')}")
     return valor
 
 def pagamento(valor):
@@ -93,6 +93,8 @@ while True:
     bebida, valor_final, quantidade = selecionar_qtd(escolha)
     valor_final = pagar(bebida, valor_final, quantidade)
     troco = pagamento(valor_final)
+    valor_final = f"{valor_final}".replace('.', ',')
+    troco = f"{troco}".replace('.', ',')
     print(f"\nCompra finalizada!\nVocê comprou {quantidade} bebida(s) do produto {bebida}.\nO valor final foi de R${valor_final} e o troco é R${troco}\n")
     
     if not verificador():

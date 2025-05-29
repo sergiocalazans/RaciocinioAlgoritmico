@@ -63,10 +63,33 @@ def pagamento(valor):
     
     return restante
 
+# Função para verificar se continua o programa
+def verificador(valor):
+
+    while valor not in [1, 2]: # enquanto o valor colocado pelo usuário for diferente dos ultilizados na execução
+
+        print("\nValor Inválido!")
+        valor = input("\nVocê quer comprar mais? (1-sim ou 2-não) ") 
+
+    if valor == 1:
+        return False # se for falso, o loop quebrará e encerrará o programa
+    elif valor == 2:
+        return True
+
 print(tabulate(produtos, headers="firstrow", tablefmt="fancy_grid"))
-escolha = int(input("\nEscolha um produto, digitando o seu ID (identificador): "))
-escolha = obter_produto(produtos, escolha)
-bebida, valor_final, quantidade = selecionar_qtd(escolha)
-valor_final = pagar(bebida, valor_final, quantidade)
-troco = pagamento(valor_final)
-print(f"\nCompra finalizada!\nVocê comprou {quantidade} bebida(s) do produto {bebida}.\nO valor final foi de R${valor_final} e o troco é R${troco}\n")
+
+while True:
+
+    escolha = int(input("\nEscolha um produto, digitando o seu ID (identificador): "))
+    escolha = obter_produto(produtos, escolha)
+    bebida, valor_final, quantidade = selecionar_qtd(escolha)
+    valor_final = pagar(bebida, valor_final, quantidade)
+    troco = pagamento(valor_final)
+    print(f"\nCompra finalizada!\nVocê comprou {quantidade} bebida(s) do produto {bebida}.\nO valor final foi de R${valor_final} e o troco é R${troco}\n")
+    continuar = int(input("\nVocê quer comprar mais? (1-sim ou 2-não) "))
+    continuar = verificador(continuar)
+
+    if not continuar:
+        print("\nPrograma encerrado.")
+        break
+    

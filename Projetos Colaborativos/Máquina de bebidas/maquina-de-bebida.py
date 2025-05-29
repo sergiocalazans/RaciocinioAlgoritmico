@@ -54,7 +54,7 @@ def pagamento(valor):
                 raise ValueError
             else:
                 if qtd_valor > valor:
-                    restante = float(qtd_valor - valor)
+                    restante = round(float(qtd_valor - valor), 2)
                 else:
                     restante = float(0)
                 break
@@ -64,16 +64,24 @@ def pagamento(valor):
     return restante
 
 # Função para verificar se continua o programa
-def verificador(valor):
+def verificador():
 
-    while valor not in [1, 2]: # enquanto o valor colocado pelo usuário for diferente dos ultilizados na execução
+    while True: 
+        try:
+        
+            valor = int(input("\nVocê quer comprar mais? (1-sim ou 2-não) "))
 
-        print("\nValor Inválido!")
-        valor = input("\nVocê quer comprar mais? (1-sim ou 2-não) ") 
+            if valor not in [1, 2]:
+                raise ValueError
+            else:
+                break
 
-    if valor == 1:
+        except ValueError:
+            print("\nValor Inválido!")
+
+    if valor == 2:
         return False # se for falso, o loop quebrará e encerrará o programa
-    elif valor == 2:
+    else:
         return True
 
 print(tabulate(produtos, headers="firstrow", tablefmt="fancy_grid"))
@@ -86,10 +94,9 @@ while True:
     valor_final = pagar(bebida, valor_final, quantidade)
     troco = pagamento(valor_final)
     print(f"\nCompra finalizada!\nVocê comprou {quantidade} bebida(s) do produto {bebida}.\nO valor final foi de R${valor_final} e o troco é R${troco}\n")
-    continuar = int(input("\nVocê quer comprar mais? (1-sim ou 2-não) "))
-    continuar = verificador(continuar)
-
-    if not continuar:
+    
+    if not verificador():
         print("\nPrograma encerrado.")
         break
-    
+
+print("\nDesenvolvido por: Isabella, Libia e Sérgio.\n")

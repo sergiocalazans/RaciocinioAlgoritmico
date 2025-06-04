@@ -1,0 +1,37 @@
+[
+    {
+        "ID": "1",
+        "Valor": 200.0,
+        "Estoque": 5
+    },
+    {
+        "ID": "2",
+        "Valor": 100.0,
+        "Estoque": 10
+    },
+    {
+        "ID": "3",
+        "Valor": 50.0,
+        "Estoque": 10
+    },
+    {
+        "ID": "4",
+        "Valor": 20.0,
+        "Estoque": 10
+    },
+    {
+        "ID": "5",
+        "Valor": 10.0,
+        "Estoque": 10
+    },
+    {
+        "ID": "6",
+        "Valor": 5.0,
+        "Estoque": 9
+    },
+    {
+        "ID": "7",
+        "Valor": 2.0,
+        "Estoque": 9
+    }
+]

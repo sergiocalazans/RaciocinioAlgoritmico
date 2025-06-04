@@ -3,7 +3,7 @@ from tabulate import tabulate
 def obter_produto(matriz, indice):
     return matriz[indice]
 
-def selecionar_qtd(vetor):
+def obter_info(vetor):
 
     produto = str(vetor[1])
     valor = float(vetor[2])
@@ -17,7 +17,7 @@ def selecionar_qtd(vetor):
     while True:
 
         try:
-            qtd = int(input(f"Digite a quantidade de bebidas: "))
+            qtd = int(input(f"Digite a quantidade da compra: "))
             if qtd < 0 or qtd > estoque:
                 raise ValueError
             else:
@@ -27,7 +27,7 @@ def selecionar_qtd(vetor):
     
     return produto, valor, qtd
         
-def pagar(produto, valor, qtd):
+def compra(produto, valor, qtd):
 
     calculo = valor * qtd
     valor = round(calculo, 2)
@@ -35,11 +35,28 @@ def pagar(produto, valor, qtd):
     print(f"\nO valor do pagamento da(s) bebida(s) do produto {produto} é: R${str(valor).replace('.', ',')}")
     return valor
 
+cedulas  = [["ID", "Valor (R$)", "Estoque"],
+            [1, 200, 10],
+            [2, 100, 10],
+            [3, 50, 10],
+            [4, 20, 10],
+            [5, 10, 10],
+            [6, 5, 10],
+            [7, 2, 10]]
+
+moedas = [["ID", "Valor (R$)", "Estoque"],
+          [1, 1.00, 10],
+          [2, 0.50, 10],
+          [3, 0.25, 10],
+          [4, 0.10, 10],
+          [5, 0.05, 10],
+          [6, 0.01, 10]]
+
 def pagamento(valor):
 
     while True:
         try:
-            qtd_valor = float(input("\nDigite um valor para pagar: "))
+            qtd_valor = float(input("\nDigite um valor para o pagamento: "))
 
             if qtd_valor < valor:
                 raise ValueError
@@ -50,7 +67,7 @@ def pagamento(valor):
                     restante = float(0)
                 break
         except ValueError:
-            print("\nDigite um valor suficiente para pagar.")
+            print("\nPor favor, digite um valor suficiente para o pagamento.")
     
     return restante
 
@@ -60,7 +77,7 @@ def verificador():
     while True: 
         try:
         
-            valor = int(input("\nVocê quer comprar mais? (1-sim ou 2-não) "))
+            valor = int(input("\nVocê quer comprar mais? (1: Sim ou 2: Não) "))
 
             if valor not in [1, 2]:
                 raise ValueError
@@ -90,8 +107,8 @@ while True:
 
     escolha = int(input("\nEscolha um produto, digitando o seu ID (identificador): "))
     escolha = obter_produto(produtos, escolha)
-    bebida, valor_final, quantidade = selecionar_qtd(escolha)
-    valor_final = pagar(bebida, valor_final, quantidade)
+    bebida, valor_final, quantidade = obter_info(escolha)
+    valor_final = compra(bebida, valor_final, quantidade)
     troco = pagamento(valor_final)
     valor_final = f"{valor_final}".replace('.', ',')
     troco = f"{troco}".replace('.', ',')
@@ -101,4 +118,4 @@ while True:
         print("\nPrograma encerrado.")
         break
 
-print("\nDesenvolvido por: Isabella, Libia e Sérgio.\n")
+print("\nDesenvolvido por: Isabelle, Libia e Sérgio.\n")

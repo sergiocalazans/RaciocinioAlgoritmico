@@ -2,7 +2,7 @@
     {
         "ID": "1",
         "Bebida": "Coca-cola",
-        "Preço": "3.75",
+        "Preço": "4.0",
         "Estoque": "10"
     },
     {
@@ -21,7 +21,7 @@
         "ID": "4",
         "Bebida": "Café",
         "Preço": "1.25",
-        "Estoque": "82"
+        "Estoque": "100"
     },
     {
         "ID": "5",

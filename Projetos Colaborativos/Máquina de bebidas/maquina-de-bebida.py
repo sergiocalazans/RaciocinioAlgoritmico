@@ -310,3 +310,6 @@ while True:
     if input("Deseja fazer nova operação? (s/n): ").lower() != "s":
         print("Programa encerrado.")
         break
+
+
+print("Agradeçemos por utilizar! Desenvolvido por: Isabelle, Libia e Sérgio.")

@@ -8,11 +8,10 @@ def carregar_json(arquivo):
             return json.load(f)
     except FileNotFoundError:
         print(f"Erro: Arquivo '{arquivo}' não encontrado.")
-        return [] # retorna uma lista vazia para evitar erros posteriores
+        return []
     except json.JSONDecodeError:
         print(f"Erro: Arquivo '{arquivo}' não é um JSON válido.")
         return []
-
 
 def salvar_json(arquivo, dados):
     with open(arquivo, "w", encoding="utf-8") as f:
@@ -36,7 +35,6 @@ def mostrar_lista(lista, tipo):
     headers = ["ID", "Item", "Estoque"]
     data = [[item['ID'], item.get("Bebida") or f"R${item['Valor']}", item['Estoque']] for item in lista]
     print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
-
 
 # Escolher produto
 def escolher_produto(produtos):
@@ -80,7 +78,6 @@ def pagamento(valor, cedulas, moedas):
     if troco > 0:
         print(f"Troco: R${str(troco).replace('.', ',')}")
         cedulas, moedas, distribuido = distribuir_troco(troco, cedulas, moedas)
-        # Mostrar troco com tabulate
         if distribuido:
             headers = ["Valor", "Quantidade"]
             data = [[f"R${str(v).replace('.', ',')}", q] for v, q in distribuido]
@@ -91,17 +88,32 @@ def pagamento(valor, cedulas, moedas):
         print("Pagamento exato. Sem troco.")
     return cedulas, moedas
 
-# Distribuição de troco com sort
 def distribuir_troco(troco, cedulas, moedas):
     distribuido = []
-    todos = sorted(cedulas + moedas, key=lambda x: float(x["Valor"]), reverse=True)
+    lista_original = cedulas + moedas
+    todos = []
 
+    # Ordenação manual (ordem decrescente por valor)
+    usados = [False] * len(lista_original)
+    while len(todos) < len(lista_original):
+        maior_valor = -1
+        indice_maior = -1
+        for i, item in enumerate(lista_original):
+            if not usados[i]:
+                valor_atual = float(item["Valor"])
+                if valor_atual > maior_valor:
+                    maior_valor = valor_atual
+                    indice_maior = i
+        usados[indice_maior] = True
+        todos.append(lista_original[indice_maior])
+
+    # Distribuição do troco
     for item in todos:
         valor = float(item["Valor"])
         estoque = int(item["Estoque"])
         count = 0
         while troco >= valor and estoque > 0:
-            troco -= valor
+            troco = round(troco - valor, 2)
             estoque -= 1
             count += 1
         item["Estoque"] = estoque
@@ -114,7 +126,7 @@ def distribuir_troco(troco, cedulas, moedas):
 # Modo administrador
 def modo_admin(produtos, cedulas, moedas):
     senha = input("Digite a senha de administrador: ")
-    if senha != "admin":  # Substitua "admin" pela senha desejada
+    if senha != "usuarioburro":
         print("Senha incorreta. Acesso negado.")
         return False
 
@@ -147,6 +159,19 @@ def modo_admin(produtos, cedulas, moedas):
         else:
             print("Opção inválida.")
 
+# Criar produto
+def criar_novo_produto():
+    try:
+        id_novo = input("Digite o ID do novo produto: ")
+        bebida_novo = input("Digite o nome da bebida: ")
+        preco_novo = float(input("Digite o preço da bebida (ex: 5.50): "))
+        estoque_novo = int(input("Digite a quantidade em estoque: "))
+        return {"ID": id_novo, "Bebida": bebida_novo, "Preço": str(preco_novo), "Estoque": str(estoque_novo)}
+    except ValueError:
+        print("Erro ao criar produto. Verifique os valores.")
+        return None
+
+# Menu principal de edição de produtos
 def editar_produtos(produtos):
     while True:
         print("\n--- EDITAR PRODUTOS ---")
@@ -161,27 +186,80 @@ def editar_produtos(produtos):
                 produtos.append(novo_produto)
                 salvar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json", produtos)
         elif op == "2":
-            editar_estoque(produtos, "produto")
+            editar_produto_existente(produtos)
         elif op == "3":
             break
         else:
             print("Opção inválida.")
 
+# Subopções de edição de produto existente
+def editar_produto_existente(produtos):
+    mostrar_produtos(produtos)
+    id_editar = input("Digite o ID do produto a ser editado: ")
+    produto = next((p for p in produtos if p["ID"] == id_editar), None)
 
-def criar_novo_produto():
+    if not produto:
+        print("ID não encontrado.")
+        return
+
+    while True:
+        print("\n-- O que deseja editar? --")
+        print("1. Editar totalmente o produto")
+        print("2. Editar nome")
+        print("3. Editar preço")
+        print("4. Editar estoque")
+        print("5. Voltar")
+        op = input("Escolha: ")
+
+        if op == "1":
+            editar_produto_totalmente(produto)
+        elif op == "2":
+            editar_nome_produto(produto)
+        elif op == "3":
+            editar_preco_produto(produto)
+        elif op == "4":
+            editar_estoque_produto(produto)
+        elif op == "5":
+            break
+        else:
+            print("Opção inválida.")
+
+    salvar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json", produtos)
+
+def editar_produto_totalmente(produto):
     try:
-        id_novo = input("Digite o ID do novo produto: ")
-        bebida_novo = input("Digite o nome da bebida: ")
-        preco_novo = float(input("Digite o preço da bebida (ex: 5.50): "))
-        estoque_novo = int(input("Digite a quantidade em estoque: "))
-
-        return {"ID": id_novo, "Bebida": bebida_novo, "Preço": str(preco_novo), "Estoque": str(estoque_novo)}
+        novo_nome = input(f"Nome atual: {produto['Bebida']}\nNovo nome: ")
+        novo_preco = float(input(f"Preço atual: R${produto['Preço']}\nNovo preço: "))
+        novo_estoque = int(input(f"Estoque atual: {produto['Estoque']}\nNovo estoque: "))
+        produto["Bebida"] = novo_nome
+        produto["Preço"] = str(novo_preco)
+        produto["Estoque"] = str(novo_estoque)
+        print("Produto atualizado com sucesso.")
     except ValueError:
-        print("Erro ao criar produto. Certifique-se de inserir valores numéricos válidos para preço e estoque.")
-        return None
+        print("Erro ao editar. Verifique os valores.")
 
+def editar_nome_produto(produto):
+    novo_nome = input(f"Nome atual: {produto['Bebida']}\nNovo nome: ")
+    produto["Bebida"] = novo_nome
+    print("Nome atualizado com sucesso.")
 
-# Edição de estoque
+def editar_preco_produto(produto):
+    try:
+        novo_preco = float(input(f"Preço atual: R${produto['Preço']}\nNovo preço: "))
+        produto["Preço"] = str(novo_preco)
+        print("Preço atualizado com sucesso.")
+    except ValueError:
+        print("Valor inválido.")
+
+def editar_estoque_produto(produto):
+    try:
+        novo_estoque = int(input(f"Estoque atual: {produto['Estoque']}\nNovo estoque: "))
+        produto["Estoque"] = str(novo_estoque)
+        print("Estoque atualizado com sucesso.")
+    except ValueError:
+        print("Valor inválido.")
+
+# Edição de estoque para cédulas/moedas
 def editar_estoque(lista, tipo):
     mostrar_lista(lista, tipo)
     id_editar = input("ID para editar: ")
@@ -199,7 +277,6 @@ def editar_estoque(lista, tipo):
                 return
     print("ID não encontrado.")
 
-
 # --- Execução principal ---
 produtos = carregar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json")
 cedulas = carregar_json("./Projetos Colaborativos/Máquina de bebidas/cedulas.json")
@@ -214,10 +291,9 @@ while True:
             break
         continue
 
-    if not produtos: # Verifica se há produtos para exibir antes de continuar
+    if not produtos:
         print("Não há produtos cadastrados para venda.")
         continue
-
 
     mostrar_produtos(produtos)
     produto = escolher_produto(produtos)

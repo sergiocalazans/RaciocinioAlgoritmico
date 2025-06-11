@@ -278,9 +278,12 @@ def editar_estoque(lista, tipo):
     print("ID não encontrado.")
 
 # --- Execução principal ---
-produtos = carregar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json")
-cedulas = carregar_json("./Projetos Colaborativos/Máquina de bebidas/cedulas.json")
-moedas = carregar_json("./Projetos Colaborativos/Máquina de bebidas/moedas.json")
+
+caminho = "./Projetos Colaborativos/Máquina de bebidas/"
+
+produtos = carregar_json(caminho,"produtos.json")
+cedulas = carregar_json(caminho, "cedulas.json")
+moedas = carregar_json(caminho, "moedas.json")
 
 print("=== MÁQUINA DE BEBIDAS ===")
 
@@ -303,9 +306,9 @@ while True:
 
     cedulas, moedas = pagamento(total, cedulas, moedas)
 
-    salvar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json", produtos)
-    salvar_json("./Projetos Colaborativos/Máquina de bebidas/cedulas.json", cedulas)
-    salvar_json("./Projetos Colaborativos/Máquina de bebidas/moedas.json", moedas)
+    salvar_json(f"{caminho}produtos.json", produtos)
+    salvar_json(f"{caminho}cedulas.json", cedulas)
+    salvar_json(f"{caminho}moedas.json", moedas)
 
     if input("Deseja fazer nova operação? (s/n): ").lower() != "s":
         print("Programa encerrado.")

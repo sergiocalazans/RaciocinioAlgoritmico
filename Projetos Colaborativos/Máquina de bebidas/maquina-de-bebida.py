@@ -33,7 +33,7 @@ def mostrar_lista(lista, tipo):
         print("Nenhum item cadastrado.")
         return
     headers = ["ID", "Item", "Estoque"]
-    data = [[item['ID'], item.get("Bebida") or f"R${item['Valor']}", item['Estoque']] for item in lista]
+    data = [[item['ID'], f"R${item['Valor']}", item['Estoque']] for item in lista]
     print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
 
 # Escolher produto
@@ -142,7 +142,7 @@ def modo_admin(produtos, cedulas, moedas):
         op = input("Escolha: ")
 
         if op == "1":
-            mostrar_lista(produtos, "produto")
+            mostrar_produtos(produtos)
         elif op == "2":
             mostrar_lista(cedulas, "cédula")
         elif op == "3":
@@ -281,9 +281,9 @@ def editar_estoque(lista, tipo):
 
 caminho = "./Projetos Colaborativos/Máquina de bebidas/"
 
-produtos = carregar_json(caminho,"produtos.json")
-cedulas = carregar_json(caminho, "cedulas.json")
-moedas = carregar_json(caminho, "moedas.json")
+produtos = carregar_json(caminho + "produtos.json")
+cedulas = carregar_json(caminho + "cedulas.json")
+moedas = carregar_json(caminho + "moedas.json")
 
 print("=== MÁQUINA DE BEBIDAS ===")
 

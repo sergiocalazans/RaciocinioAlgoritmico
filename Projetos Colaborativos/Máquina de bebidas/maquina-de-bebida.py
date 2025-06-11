@@ -1,99 +1,125 @@
+# Importa a biblioteca json para leitura e escrita de arquivos JSON
 import json
+# Importa a função tabulate para exibir dados em formato de tabela no terminal
 from tabulate import tabulate
 
-# Funções de manipulação de JSON
+# === Funções de manipulação de JSON ===
+
+# Função para carregar dados de um arquivo JSON
 def carregar_json(arquivo):
     try:
+        # Abre o arquivo no modo leitura com codificação UTF-8
         with open(arquivo, "r", encoding="utf-8") as f:
-            return json.load(f)
+            return json.load(f)  # Retorna o conteúdo carregado
     except FileNotFoundError:
-        print(f"Erro: Arquivo '{arquivo}' não encontrado.")
-        return []
+        print(f"Erro: Arquivo '{arquivo}' não encontrado.")  # Mensagem de erro se o arquivo não existir
+        return []  # Retorna lista vazia
     except json.JSONDecodeError:
-        print(f"Erro: Arquivo '{arquivo}' não é um JSON válido.")
-        return []
+        print(f"Erro: Arquivo '{arquivo}' não é um JSON válido.")  # Mensagem de erro se o arquivo estiver mal formatado
+        return []  # Retorna lista vazia
 
+# Função para salvar dados em um arquivo JSON
 def salvar_json(arquivo, dados):
+    # Abre o arquivo no modo escrita com codificação UTF-8
     with open(arquivo, "w", encoding="utf-8") as f:
+        # Escreve os dados em formato JSON com indentação
         json.dump(dados, f, indent=4, ensure_ascii=False)
 
-# Exibir produtos usando tabulate
+# === Exibir produtos usando tabulate ===
+
+# Função para exibir produtos cadastrados
 def mostrar_produtos(produtos):
     print("\nProdutos disponíveis:")
-    if not produtos:
+    if not produtos:  # Verifica se a lista está vazia
         print("Nenhum produto cadastrado.")
         return
+    # Define os cabeçalhos da tabela
     headers = ["ID", "Bebida", "Preço", "Estoque"]
+    # Monta a lista de dados com formatação de preço
     data = [[p['ID'], p['Bebida'], f"R${p['Preço'].replace('.', ',')}", p['Estoque']] for p in produtos]
+    # Exibe a tabela formatada
     print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
 
+# Função para exibir cédulas ou moedas cadastradas
 def mostrar_lista(lista, tipo):
     print(f"\n{tipo.capitalize()}s disponíveis:")
-    if not lista:
+    if not lista:  # Verifica se a lista está vazia
         print("Nenhum item cadastrado.")
         return
+    # Define os cabeçalhos da tabela
     headers = ["ID", "Item", "Estoque"]
+    # Monta a tabela com valores e estoques
     data = [[item['ID'], f"R${item['Valor']}", item['Estoque']] for item in lista]
+    # Exibe a tabela formatada
     print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
 
-# Escolher produto
+# === Escolher produto ===
+
+# Função para escolher um produto pelo ID
 def escolher_produto(produtos):
     while True:
-        escolha = input("Digite o ID do produto: ")
+        escolha = input("Digite o ID do produto: ")  # Solicita o ID ao usuário
         for p in produtos:
-            if p["ID"] == escolha:
+            if p["ID"] == escolha:  # Se o ID for válido, retorna o produto
                 return p
-        print("ID inválido.")
+        print("ID inválido.")  # Mensagem de erro se ID não for encontrado
 
-# Solicitar quantidade válida
+# === Solicitar quantidade válida ===
+
+# Função para solicitar a quantidade desejada do produto
 def solicitar_quantidade(produto):
-    estoque = int(produto["Estoque"])
+    estoque = int(produto["Estoque"])  # Obtém o estoque do produto
     while True:
         try:
-            qtd = int(input("Quantidade desejada: "))
-            if 0 < qtd <= estoque:
+            qtd = int(input("Quantidade desejada: "))  # Solicita a quantidade
+            if 0 < qtd <= estoque:  # Verifica se a quantidade está disponível
                 return qtd
             print("Quantidade fora do estoque.")
         except ValueError:
             print("Entrada inválida. Digite um número inteiro.")
 
-# Calcular valor total
-def calcular_pagamento(preco, qtd):
-    return round(float(preco) * qtd, 2)
+# === Calcular valor total ===
 
-# Pagamento e troco
+# Função que calcula o valor total da compra
+def calcular_pagamento(preco, qtd):
+    return round(float(preco) * qtd, 2)  # Multiplica o preço pela quantidade
+
+# === Pagamento e troco ===
+
+# Função que gerencia o pagamento e cálculo de troco
 def pagamento(valor, cedulas, moedas):
-    print(f"Total: R${str(valor).replace('.', ',')}")
+    print(f"Total: R${str(valor).replace('.', ',')}")  # Exibe o valor total
     while True:
         try:
-            pago = float(input("Valor pago: "))
+            pago = float(input("Valor pago: "))  # Solicita o valor pago
             if pago < valor:
-                print("Valor insuficiente.")
+                print("Valor insuficiente.")  # Se o valor for menor que o necessário
             else:
                 break
         except ValueError:
             print("Entrada inválida. Digite um número.")
 
-    troco = round(pago - valor, 2)
+    troco = round(pago - valor, 2)  # Calcula o troco
     if troco > 0:
-        print(f"Troco: R${str(troco).replace('.', ',')}")
-        cedulas, moedas, distribuido = distribuir_troco(troco, cedulas, moedas)
-        if distribuido:
+        print(f"Troco: R${str(troco).replace('.', ',')}")  # Exibe o troco
+        cedulas, moedas, distribuido = distribuir_troco(troco, cedulas, moedas)  # Calcula a distribuição do troco
+        if distribuido:  # Se houve distribuição possível
             headers = ["Valor", "Quantidade"]
             data = [[f"R${str(v).replace('.', ',')}", q] for v, q in distribuido]
-            print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
+            print(tabulate(data, headers=headers, tablefmt="fancy_grid"))  # Exibe a tabela de troco
         else:
             print("Troco incompleto por falta de cédulas/moedas.")
     else:
         print("Pagamento exato. Sem troco.")
     return cedulas, moedas
 
+# Função para distribuir o troco entre cédulas e moedas
 def distribuir_troco(troco, cedulas, moedas):
-    distribuido = []
-    lista_original = cedulas + moedas
-    todos = []
+    distribuido = []  # Lista de itens distribuídos
+    lista_original = cedulas + moedas  # Junta cédulas e moedas
+    todos = []  # Lista ordenada por valor
 
-    # Ordenação manual (ordem decrescente por valor)
+    # Ordena manualmente os itens por valor decrescente
     usados = [False] * len(lista_original)
     while len(todos) < len(lista_original):
         maior_valor = -1
@@ -107,7 +133,7 @@ def distribuir_troco(troco, cedulas, moedas):
         usados[indice_maior] = True
         todos.append(lista_original[indice_maior])
 
-    # Distribuição do troco
+    # Tenta usar os itens disponíveis para formar o troco
     for item in todos:
         valor = float(item["Valor"])
         estoque = int(item["Estoque"])
@@ -116,17 +142,18 @@ def distribuir_troco(troco, cedulas, moedas):
             troco = round(troco - valor, 2)
             estoque -= 1
             count += 1
-        item["Estoque"] = estoque
+        item["Estoque"] = estoque  # Atualiza o estoque
         if count > 0:
-            distribuido.append((valor, count))
+            distribuido.append((valor, count))  # Adiciona à lista de troco dado
 
     return cedulas, moedas, distribuido
 
+# === Modo administrador ===
 
-# Modo administrador
+# Função para entrar no modo administrador
 def modo_admin(produtos, cedulas, moedas):
     senha = input("Digite a senha de administrador: ")
-    if senha != "usuarioburro":
+    if senha != "usuarioburro":  # Verifica a senha
         print("Senha incorreta. Acesso negado.")
         return False
 
@@ -159,7 +186,9 @@ def modo_admin(produtos, cedulas, moedas):
         else:
             print("Opção inválida.")
 
-# Criar produto
+# === Criar produto ===
+
+# Cria e retorna um novo produto com base na entrada do usuário
 def criar_novo_produto():
     try:
         id_novo = input("Digite o ID do novo produto: ")
@@ -171,7 +200,7 @@ def criar_novo_produto():
         print("Erro ao criar produto. Verifique os valores.")
         return None
 
-# Menu principal de edição de produtos
+# Menu para editar produtos (criar novo ou editar existentes)
 def editar_produtos(produtos):
     while True:
         print("\n--- EDITAR PRODUTOS ---")
@@ -192,7 +221,7 @@ def editar_produtos(produtos):
         else:
             print("Opção inválida.")
 
-# Subopções de edição de produto existente
+# Permite editar um produto já existente
 def editar_produto_existente(produtos):
     mostrar_produtos(produtos)
     id_editar = input("Digite o ID do produto a ser editado: ")
@@ -226,6 +255,7 @@ def editar_produto_existente(produtos):
 
     salvar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json", produtos)
 
+# Edita todas as informações do produto
 def editar_produto_totalmente(produto):
     try:
         novo_nome = input(f"Nome atual: {produto['Bebida']}\nNovo nome: ")
@@ -238,11 +268,13 @@ def editar_produto_totalmente(produto):
     except ValueError:
         print("Erro ao editar. Verifique os valores.")
 
+# Edita apenas o nome do produto
 def editar_nome_produto(produto):
     novo_nome = input(f"Nome atual: {produto['Bebida']}\nNovo nome: ")
     produto["Bebida"] = novo_nome
     print("Nome atualizado com sucesso.")
 
+# Edita apenas o preço do produto
 def editar_preco_produto(produto):
     try:
         novo_preco = float(input(f"Preço atual: R${produto['Preço']}\nNovo preço: "))
@@ -251,6 +283,7 @@ def editar_preco_produto(produto):
     except ValueError:
         print("Valor inválido.")
 
+# Edita apenas o estoque do produto
 def editar_estoque_produto(produto):
     try:
         novo_estoque = int(input(f"Estoque atual: {produto['Estoque']}\nNovo estoque: "))
@@ -259,7 +292,9 @@ def editar_estoque_produto(produto):
     except ValueError:
         print("Valor inválido.")
 
-# Edição de estoque para cédulas/moedas
+# === Edição de estoque de cédulas/moedas ===
+
+# Permite alterar o estoque de uma cédula ou moeda
 def editar_estoque(lista, tipo):
     mostrar_lista(lista, tipo)
     id_editar = input("ID para editar: ")
@@ -277,21 +312,24 @@ def editar_estoque(lista, tipo):
                 return
     print("ID não encontrado.")
 
-# --- Execução principal ---
+# === Execução principal ===
 
+# Define o caminho base para os arquivos JSON
 caminho = "./Projetos Colaborativos/Máquina de bebidas/"
 
+# Carrega os dados dos arquivos
 produtos = carregar_json(caminho + "produtos.json")
 cedulas = carregar_json(caminho + "cedulas.json")
 moedas = carregar_json(caminho + "moedas.json")
 
 print("=== MÁQUINA DE BEBIDAS ===")
 
+# Loop principal da aplicação
 while True:
     modo = input("\nDigite 'admin' para modo administrador ou Enter para comprar: ").lower()
     if modo == "admin":
         if modo_admin(produtos, cedulas, moedas):
-            break
+            break  # Encerra o programa se sair do modo admin
         continue
 
     if not produtos:
@@ -302,10 +340,11 @@ while True:
     produto = escolher_produto(produtos)
     qtd = solicitar_quantidade(produto)
     total = calcular_pagamento(produto["Preço"], qtd)
-    produto["Estoque"] = str(int(produto["Estoque"]) - qtd)
+    produto["Estoque"] = str(int(produto["Estoque"]) - qtd)  # Atualiza o estoque
 
-    cedulas, moedas = pagamento(total, cedulas, moedas)
+    cedulas, moedas = pagamento(total, cedulas, moedas)  # Processa o pagamento
 
+    # Salva os dados atualizados
     salvar_json(f"{caminho}produtos.json", produtos)
     salvar_json(f"{caminho}cedulas.json", cedulas)
     salvar_json(f"{caminho}moedas.json", moedas)
@@ -314,5 +353,5 @@ while True:
         print("Programa encerrado.")
         break
 
-
-print("Agradeçemos por utilizar! Desenvolvido por: Isabelle, Libia e Sérgio.")
+# Mensagem final
+print("\nAgradeçemos por utilizar! Desenvolvido por: Isabelle, Libia e Sérgio.\n")

@@ -28,17 +28,5 @@
         "Bebida": "Redbull",
         "Preço": "13.99",
         "Estoque": "10"
-    },
-    {
-        "ID": "6",
-        "Bebida": "Fanta Uva",
-        "Preço": "3.19",
-        "Estoque": "10"
-    },
-    {
-        "ID": "7",
-        "Bebida": "Fanta Laranja",
-        "Preço": "3.4",
-        "Estoque": "10"
     }
 ]

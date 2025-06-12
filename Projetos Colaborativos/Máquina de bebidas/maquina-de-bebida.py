@@ -151,7 +151,7 @@ def distribuir_troco(troco, cedulas, moedas):
 # === Modo administrador ===
 
 # Função para entrar no modo administrador
-def modo_admin(produtos, cedulas, moedas):
+def modo_admin(produtos, cedulas, moedas, caminho):
     senha = input("Digite a senha de administrador: ")
     if senha != "usuarioburro":  # Verifica a senha
         print("Senha incorreta. Acesso negado.")
@@ -175,7 +175,7 @@ def modo_admin(produtos, cedulas, moedas):
         elif op == "3":
             mostrar_lista(moedas, "moeda")
         elif op == "4":
-            editar_produtos(produtos)
+            editar_produtos(produtos, caminho)
         elif op == "5":
             editar_estoque(cedulas, "cédula")
         elif op == "6":
@@ -200,24 +200,46 @@ def criar_novo_produto():
         print("Erro ao criar produto. Verifique os valores.")
         return None
 
-# Menu para editar produtos (criar novo ou editar existentes)
-def editar_produtos(produtos):
+# Função que permite criar, editar ou remover produtos
+def editar_produtos(produtos, caminho):
+    # Início do loop de edição (permite múltiplas ações até o usuário escolher sair)
     while True:
+        # Exibe o menu de opções para o administrador
         print("\n--- EDITAR PRODUTOS ---")
         print("1. Criar novo produto")
         print("2. Editar produto existente")
-        print("3. Voltar")
+        print("3. Remover produto")  # Opção adicionada
+        print("4. Voltar")
+
+        # Solicita a escolha do usuário
         op = input("Escolha: ")
 
+        # Se o usuário escolher criar um novo produto
         if op == "1":
+            # Chama a função que coleta dados e retorna um novo produto
             novo_produto = criar_novo_produto()
+
+            # Se o produto foi criado com sucesso (não é None)
             if novo_produto:
+                # Adiciona o novo produto à lista
                 produtos.append(novo_produto)
-                salvar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json", produtos)
+
+                # Salva a lista atualizada no JSON
+                salvar_json(f"{caminho}produtos.json", produtos)
+
+        # Se o usuário optar por editar um produto já existente
         elif op == "2":
             editar_produto_existente(produtos)
+
+        # Se o usuário optar por remover um produto
         elif op == "3":
-            break
+            remover_produto(produtos)
+
+        # Se quiser voltar ao menu anterior
+        elif op == "4":
+            break  # Sai do loop e retorna
+
+        # Se o usuário digitar uma opção inválida
         else:
             print("Opção inválida.")
 
@@ -292,6 +314,45 @@ def editar_estoque_produto(produto):
     except ValueError:
         print("Valor inválido.")
 
+# Função que remove um produto da lista de produtos, apenas se o estoque for 0
+def remover_produto(produtos):
+    # Mostra a lista atual de produtos ao administrador
+    mostrar_produtos(produtos)
+
+    # Solicita o ID do produto que será removido
+    id_remover = input("Digite o ID do produto que deseja remover: ")
+
+    # Procura o produto com base no ID fornecido
+    produto = next((p for p in produtos if p["ID"] == id_remover), None)
+
+    # Se o produto não existir, exibe mensagem de erro e sai da função
+    if not produto:
+        print("Produto não encontrado.")
+        return
+
+    # Verifica se o produto ainda tem itens no estoque
+    if int(produto["Estoque"]) > 0:
+        # Se o estoque for maior que zero, impede a remoção
+        print("Erro: só é possível remover produtos com estoque igual a 0.")
+        return
+
+    # Solicita confirmação do usuário para remover o produto
+    confirmacao = input(f"Tem certeza que deseja remover '{produto['Bebida']}'? (s/n): ").lower()
+
+    # Se o usuário confirmar a remoção
+    if confirmacao == "s":
+        # Remove o produto da lista
+        produtos.remove(produto)
+
+        # Salva a lista atualizada no arquivo JSON
+        salvar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json", produtos)
+
+        # Mensagem de sucesso
+        print("Produto removido com sucesso.")
+    else:
+        # Se o usuário cancelar a ação
+        print("Remoção cancelada.")
+
 # === Edição de estoque de cédulas/moedas ===
 
 # Permite alterar o estoque de uma cédula ou moeda
@@ -328,7 +389,7 @@ print("=== MÁQUINA DE BEBIDAS ===")
 while True:
     modo = input("\nDigite 'admin' para modo administrador ou Enter para comprar: ").lower()
     if modo == "admin":
-        if modo_admin(produtos, cedulas, moedas):
+        if modo_admin(produtos, cedulas, moedas, caminho):
             break  # Encerra o programa se sair do modo admin
         continue
 

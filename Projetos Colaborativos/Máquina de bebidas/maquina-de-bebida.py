@@ -200,6 +200,40 @@ def criar_novo_produto():
         print("Erro ao criar produto. Verifique os valores.")
         return None
 
+# Permite editar um produto já existente
+def editar_produto_existente(produtos, caminho):
+    mostrar_produtos(produtos)
+    id_editar = input("Digite o ID do produto a ser editado: ")
+    produto = next((p for p in produtos if p["ID"] == id_editar), None)
+
+    if not produto:
+        print("ID não encontrado.")
+        return
+
+    while True:
+        print("\n-- O que deseja editar? --")
+        print("1. Editar totalmente o produto")
+        print("2. Editar nome")
+        print("3. Editar preço")
+        print("4. Editar estoque")
+        print("5. Voltar")
+        op = input("Escolha: ")
+
+        if op == "1":
+            editar_produto_totalmente(produto)
+        elif op == "2":
+            editar_nome_produto(produto)
+        elif op == "3":
+            editar_preco_produto(produto)
+        elif op == "4":
+            editar_estoque_produto(produto)
+        elif op == "5":
+            break
+        else:
+            print("Opção inválida.")
+
+    salvar_json(f"{caminho}produtos.json", produtos)
+
 # Função que permite criar, editar ou remover produtos
 def editar_produtos(produtos, caminho):
     # Início do loop de edição (permite múltiplas ações até o usuário escolher sair)
@@ -242,40 +276,6 @@ def editar_produtos(produtos, caminho):
         # Se o usuário digitar uma opção inválida
         else:
             print("Opção inválida.")
-
-# Permite editar um produto já existente
-def editar_produto_existente(produtos, caminho):
-    mostrar_produtos(produtos)
-    id_editar = input("Digite o ID do produto a ser editado: ")
-    produto = next((p for p in produtos if p["ID"] == id_editar), None)
-
-    if not produto:
-        print("ID não encontrado.")
-        return
-
-    while True:
-        print("\n-- O que deseja editar? --")
-        print("1. Editar totalmente o produto")
-        print("2. Editar nome")
-        print("3. Editar preço")
-        print("4. Editar estoque")
-        print("5. Voltar")
-        op = input("Escolha: ")
-
-        if op == "1":
-            editar_produto_totalmente(produto)
-        elif op == "2":
-            editar_nome_produto(produto)
-        elif op == "3":
-            editar_preco_produto(produto)
-        elif op == "4":
-            editar_estoque_produto(produto)
-        elif op == "5":
-            break
-        else:
-            print("Opção inválida.")
-
-    salvar_json(f"{caminho}produtos.json", produtos)
 
 # Edita todas as informações do produto
 def editar_produto_totalmente(produto):

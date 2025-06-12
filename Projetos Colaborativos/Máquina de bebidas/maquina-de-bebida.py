@@ -177,9 +177,9 @@ def modo_admin(produtos, cedulas, moedas, caminho):
         elif op == "4":
             editar_produtos(produtos, caminho)
         elif op == "5":
-            editar_estoque(cedulas, "cédula")
+            editar_estoque(cedulas, "cédula", caminho)
         elif op == "6":
-            editar_estoque(moedas, "moeda")
+            editar_estoque(moedas, "moeda", caminho)
         elif op == "7":
             print("Programa encerrado.")
             return True
@@ -229,7 +229,7 @@ def editar_produtos(produtos, caminho):
 
         # Se o usuário optar por editar um produto já existente
         elif op == "2":
-            editar_produto_existente(produtos)
+            editar_produto_existente(produtos, caminho)
 
         # Se o usuário optar por remover um produto
         elif op == "3":
@@ -244,7 +244,7 @@ def editar_produtos(produtos, caminho):
             print("Opção inválida.")
 
 # Permite editar um produto já existente
-def editar_produto_existente(produtos):
+def editar_produto_existente(produtos, caminho):
     mostrar_produtos(produtos)
     id_editar = input("Digite o ID do produto a ser editado: ")
     produto = next((p for p in produtos if p["ID"] == id_editar), None)
@@ -275,7 +275,7 @@ def editar_produto_existente(produtos):
         else:
             print("Opção inválida.")
 
-    salvar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json", produtos)
+    salvar_json(f"{caminho}produtos.json", produtos)
 
 # Edita todas as informações do produto
 def editar_produto_totalmente(produto):
@@ -315,7 +315,7 @@ def editar_estoque_produto(produto):
         print("Valor inválido.")
 
 # Função que remove um produto da lista de produtos, apenas se o estoque for 0
-def remover_produto(produtos):
+def remover_produto(produtos, caminho):
     # Mostra a lista atual de produtos ao administrador
     mostrar_produtos(produtos)
 
@@ -345,7 +345,7 @@ def remover_produto(produtos):
         produtos.remove(produto)
 
         # Salva a lista atualizada no arquivo JSON
-        salvar_json("./Projetos Colaborativos/Máquina de bebidas/produtos.json", produtos)
+        salvar_json(f"{caminho}produtos.json", produtos)
 
         # Mensagem de sucesso
         print("Produto removido com sucesso.")
@@ -356,7 +356,7 @@ def remover_produto(produtos):
 # === Edição de estoque de cédulas/moedas ===
 
 # Permite alterar o estoque de uma cédula ou moeda
-def editar_estoque(lista, tipo):
+def editar_estoque(lista, tipo, caminho):
     mostrar_lista(lista, tipo)
     id_editar = input("ID para editar: ")
 
@@ -366,7 +366,7 @@ def editar_estoque(lista, tipo):
                 novo_estoque = int(input("Novo estoque: "))
                 item["Estoque"] = str(novo_estoque)
                 print("Atualizado com sucesso.")
-                salvar_json(f"./Projetos Colaborativos/Máquina de bebidas/{tipo}s.json", lista)
+                salvar_json(f"{caminho}{tipo}s.json", lista)
                 return
             except ValueError:
                 print("Entrada inválida. Digite um número inteiro.")

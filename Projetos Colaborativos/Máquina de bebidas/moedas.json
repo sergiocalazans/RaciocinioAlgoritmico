@@ -2,17 +2,17 @@
     {
         "ID": "1",
         "Valor": 1.0,
-        "Estoque": 9
+        "Estoque": 10
     },
     {
         "ID": "2",
         "Valor": 0.5,
-        "Estoque": 9
+        "Estoque": 10
     },
     {
         "ID": "3",
         "Valor": 0.25,
-        "Estoque": 9
+        "Estoque": 10
     },
     {
         "ID": "4",
@@ -27,6 +27,6 @@
     {
         "ID": "6",
         "Valor": 0.01,
-        "Estoque": 6
+        "Estoque": 10
     }
 ]

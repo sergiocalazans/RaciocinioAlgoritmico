@@ -100,6 +100,19 @@ def pagamento(valor, cedulas, moedas):
             print("Entrada inválida. Digite um número.")
 
     troco = round(pago - valor, 2)  # Calcula o troco
+
+    # Verifica se o troco a ser dado é maior que o total de dinheiro na máquina
+    total_disponivel_maquina = sum(float(item['Valor']) * int(item['Estoque']) for item in cedulas + moedas)
+    total_disponivel_maquina = round(total_disponivel_maquina, 2)
+
+    # Se o troco for maior que o dinheiro disponível, cancela a compra e encerra
+    if troco > total_disponivel_maquina:
+        print("\nDESCULPE! A máquina não possui troco suficiente para esta transação.")
+        print(f"Troco necessário: R${str(troco).replace('.', ',')}. Disponível na máquina: R${str(total_disponivel_maquina).replace('.', ',')}.")
+        print(f"Compra cancelada. Devolvendo seu pagamento de R${str(pago).replace('.', ',')}.")
+        print("Programa encerrado.")
+        exit()  # Encerra a execução do programa
+
     if troco > 0:
         print(f"Troco: R${str(troco).replace('.', ',')}")  # Exibe o troco
         cedulas, moedas, distribuido = distribuir_troco(troco, cedulas, moedas)  # Calcula a distribuição do troco
@@ -153,7 +166,7 @@ def distribuir_troco(troco, cedulas, moedas):
 # Função para entrar no modo administrador
 def modo_admin(produtos, cedulas, moedas, caminho):
     senha = input("Digite a senha de administrador: ")
-    if senha != "usuarioburro":  # Verifica a senha
+    if senha != "usuario":  # Verifica a senha
         print("Senha incorreta. Acesso negado.")
         return False
 
@@ -267,7 +280,7 @@ def editar_produtos(produtos, caminho):
 
         # Se o usuário optar por remover um produto
         elif op == "3":
-            remover_produto(produtos)
+            remover_produto(produtos, caminho) # Corrigido para passar o caminho
 
         # Se quiser voltar ao menu anterior
         elif op == "4":
@@ -401,9 +414,12 @@ while True:
     produto = escolher_produto(produtos)
     qtd = solicitar_quantidade(produto)
     total = calcular_pagamento(produto["Preço"], qtd)
-    produto["Estoque"] = str(int(produto["Estoque"]) - qtd)  # Atualiza o estoque
 
-    cedulas, moedas = pagamento(total, cedulas, moedas)  # Processa o pagamento
+    # Processa o pagamento. A função irá encerrar o programa se não houver troco suficiente.
+    cedulas, moedas = pagamento(total, cedulas, moedas)
+
+    # Apenas atualiza o estoque e salva se o pagamento foi bem-sucedido (o programa não encerrou)
+    produto["Estoque"] = str(int(produto["Estoque"]) - qtd)  # Atualiza o estoque
 
     # Salva os dados atualizados
     salvar_json(f"{caminho}produtos.json", produtos)

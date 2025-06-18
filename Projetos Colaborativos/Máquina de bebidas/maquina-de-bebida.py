@@ -120,8 +120,6 @@ def pagamento(valor, cedulas, moedas):
             headers = ["Valor", "Quantidade"]
             data = [[f"R${str(v).replace('.', ',')}", q] for v, q in distribuido]
             print(tabulate(data, headers=headers, tablefmt="fancy_grid"))  # Exibe a tabela de troco
-        else:
-            print("Troco incompleto por falta de cédulas/moedas.")
     else:
         print("Pagamento exato. Sem troco.")
     return cedulas, moedas

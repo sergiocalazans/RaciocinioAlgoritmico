@@ -3,6 +3,36 @@ import json
 # Importa a função tabulate para exibir dados em formato de tabela no terminal
 from tabulate import tabulate
 
+# === Função para formatar o valor de dinheiro ===
+
+def formatar(valor):
+    """
+    Formata um valor numérico para o padrão de moeda brasileiro (R$ X.XXX,XX).
+    A função é robusta e lida com valores em formato de string ou número.
+    """
+    try:
+        # Converte o valor para float, pois a formatação f-string requer um número.
+        # Isso é crucial, pois os valores lidos do JSON vêm como string.
+        valor_numerico = float(valor)
+    except (ValueError, TypeError):
+        # Caso a conversão falhe (ex: texto não numérico), retorna um valor padrão.
+        return "R$ --,--"
+
+    # Formata o número com duas casas decimais e usa '_' como separador de milhar temporário.
+    # Exemplo: 1234.50 se torna "1_234.50"
+    texto_formatado = f"R${valor_numerico:_.2f}"
+
+    # A ordem das substituições é importante.
+    # Primeiro, trocamos o ponto decimal por vírgula.
+    # Exemplo: "R$1_234.50" se torna "R$1_234,50"
+    texto_formatado = texto_formatado.replace('.', ',')
+
+    # Depois, trocamos o separador de milhar temporário '_' por ponto.
+    # Exemplo: "R$1_234,50" se torna "R$1.234,50"
+    texto_formatado = texto_formatado.replace('_', '.')
+
+    return texto_formatado
+
 # === Funções de manipulação de JSON ===
 
 # Função para carregar dados de um arquivo JSON
@@ -36,12 +66,13 @@ def mostrar_produtos(produtos):
     # Define os cabeçalhos da tabela
     headers = ["ID", "Bebida", "Preço", "Estoque"]
     # Monta a lista de dados com formatação de preço
-    data = [[p['ID'], p['Bebida'], f"R${p['Preço'].replace('.', ',')}", p['Estoque']] for p in produtos]
+    data = [[p['ID'], p['Bebida'], f"{formatar(p['Preço'])}", p['Estoque']] for p in produtos]
     # Exibe a tabela formatada
     print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
 
 # Função para exibir cédulas ou moedas cadastradas
 def mostrar_lista(lista, tipo):
+    # O método capitalize() pega o primeiro caractere de uma string, deixa como maiusculo e o resto minusculo
     print(f"\n{tipo.capitalize()}s disponíveis:")
     if not lista:  # Verifica se a lista está vazia
         print("Nenhum item cadastrado.")
@@ -49,7 +80,7 @@ def mostrar_lista(lista, tipo):
     # Define os cabeçalhos da tabela
     headers = ["ID", "Item", "Estoque"]
     # Monta a tabela com valores e estoques
-    data = [[item['ID'], f"R${item['Valor']}", item['Estoque']] for item in lista]
+    data = [[item['ID'], f"{formatar(item['Valor'])}", item['Estoque']] for item in lista]
     # Exibe a tabela formatada
     print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
 
@@ -88,7 +119,7 @@ def calcular_pagamento(preco, qtd):
 
 # Função que gerencia o pagamento e cálculo de troco
 def pagamento(valor, cedulas, moedas):
-    print(f"Total: R${str(valor).replace('.', ',')}")  # Exibe o valor total
+    print(f"Total: {formatar(valor)}")  # Exibe o valor total
     while True:
         try:
             pago = float(input("Valor pago: "))  # Solicita o valor pago
@@ -100,25 +131,27 @@ def pagamento(valor, cedulas, moedas):
             print("Entrada inválida. Digite um número.")
 
     troco = round(pago - valor, 2)  # Calcula o troco
+    estoque_valores = cedulas + moedas # Estoque das cedulas e moedas
 
     # Verifica se o troco a ser dado é maior que o total de dinheiro na máquina
-    total_disponivel_maquina = sum(float(item['Valor']) * int(item['Estoque']) for item in cedulas + moedas)
+    total_disponivel_maquina = sum(float(item['Valor']) * int(item['Estoque']) for item in estoque_valores)
     total_disponivel_maquina = round(total_disponivel_maquina, 2)
 
     # Se o troco for maior que o dinheiro disponível, cancela a compra e encerra
     if troco > total_disponivel_maquina:
+
         print("\nDESCULPE! A máquina não possui troco suficiente para esta transação.")
-        print(f"Troco necessário: R${str(troco).replace('.', ',')}. Disponível na máquina: R${str(total_disponivel_maquina).replace('.', ',')}.")
-        print(f"Compra cancelada. Devolvendo seu pagamento de R${str(pago).replace('.', ',')}.")
+        print(f"Troco necessário: {formatar(troco)}. Disponível na máquina: {formatar(total_disponivel_maquina)}.")
+        print(f"Compra cancelada. Devolvendo seu pagamento de {formatar(pago)}.")
         print("Programa encerrado.")
         exit()  # Encerra a execução do programa
 
     if troco > 0:
-        print(f"Troco: R${str(troco).replace('.', ',')}")  # Exibe o troco
+        print(f"Troco: {formatar(troco)}")  # Exibe o troco
         cedulas, moedas, distribuido = distribuir_troco(troco, cedulas, moedas)  # Calcula a distribuição do troco
         if distribuido:  # Se houve distribuição possível
             headers = ["Valor", "Quantidade"]
-            data = [[f"R${str(v).replace('.', ',')}", q] for v, q in distribuido]
+            data = [[f"{formatar(v)}", q] for v, q in distribuido]
             print(tabulate(data, headers=headers, tablefmt="fancy_grid"))  # Exibe a tabela de troco
     else:
         print("Pagamento exato. Sem troco.")

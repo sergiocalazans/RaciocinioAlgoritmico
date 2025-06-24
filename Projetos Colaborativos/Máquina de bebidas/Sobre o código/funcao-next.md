@@ -9,9 +9,9 @@ A função `next()` tem duas formas principais:
 1.  `next(iterator)`: Retorna o próximo item do `iterator`. Se não houver mais itens, ela levanta um erro chamado `StopIteration`.
 2.  `next(iterator, default)`: Retorna o próximo item do `iterator`. Se não houver mais itens, em vez de dar erro, ela retorna o valor que você especificou em `default`.
 
-### 2. Para que serve? (O seu caso de uso)
+### 2. Para que serve?
 
-No seu código, `next()` é usada para uma tarefa muito comum: **encontrar o primeiro item em uma coleção que satisfaz uma condição específica.**
+No código, `next()` é usada para uma tarefa muito comum: **encontrar o primeiro item em uma coleção que satisfaz uma condição específica.**
 
 Observe a linha de código nas funções `editar_produto_existente` e `remover_produto`:
 

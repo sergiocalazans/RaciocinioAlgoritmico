@@ -39,7 +39,7 @@ O resultado é exatamente o mesmo, mas o código é mais limpo, mais curto e mai
 
 ---
 
-### 2. Onde `enumerate()` é usado no seu código?
+### 2. Onde `enumerate()` é usado no código?
 
 A função `enumerate()` é utilizada dentro da função `distribuir_troco`, especificamente nesta parte do código:
 
@@ -71,7 +71,7 @@ def distribuir_troco(troco, cedulas, moedas):
 
 Vamos analisar a lógica desta parte do código para entender a necessidade do `enumerate()`.
 
-O objetivo deste bloco é **ordenar a lista de cédulas e moedas (`lista_original`) do maior valor para o menor**. O programador optou por criar um algoritmo de ordenação manual em vez de usar a função `sorted()` do Python.
+O objetivo deste bloco é **ordenar a lista de cédulas e moedas (`lista_original`) do maior valor para o menor**. O projeto optou por criar um algoritmo de ordenação manual em vez de usar a função `sorted()` do Python.
 
 **O Algoritmo Manual Funciona Assim:**
 
@@ -110,4 +110,3 @@ A função `enumerate()` foi a ferramenta perfeita para este algoritmo porque o 
 1.  **O valor do item (`item`)**, para poder compará-lo com outros.
 2.  **A sua posição original (`i`)**, para poder consultar e atualizar a lista de controle `usados`.
 
-Em essência, `enumerate()` permitiu que o código mantivesse uma "ponte" entre a lista de itens e a lista de controle, tornando o algoritmo de ordenação manual possível e relativamente legível.

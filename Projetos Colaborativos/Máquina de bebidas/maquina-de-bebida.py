@@ -439,7 +439,7 @@ while True:
 
     if not produtos:
         print("Não há produtos cadastrados para venda.")
-        continue
+        exit()
 
     mostrar_produtos(produtos)
     produto = escolher_produto(produtos)

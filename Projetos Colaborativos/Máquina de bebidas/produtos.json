@@ -3,7 +3,7 @@
         "ID": "1",
         "Bebida": "Coca-cola",
         "Preço": "4.0",
-        "Estoque": "10"
+        "Estoque": "9"
     },
     {
         "ID": "2",
@@ -12,21 +12,21 @@
         "Estoque": "10"
     },
     {
-        "ID": "3",
-        "Bebida": "Monster",
-        "Preço": "9.96",
-        "Estoque": "10"
-    },
-    {
         "ID": "4",
         "Bebida": "Café",
         "Preço": "1.25",
-        "Estoque": "100"
+        "Estoque": "98"
     },
     {
         "ID": "5",
         "Bebida": "Redbull",
         "Preço": "13.99",
-        "Estoque": "10"
+        "Estoque": "9"
+    },
+    {
+        "ID": "6",
+        "Bebida": "Capuccino",
+        "Preço": "8.7",
+        "Estoque": "11"
     }
 ]

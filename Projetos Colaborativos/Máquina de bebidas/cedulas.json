@@ -2,22 +2,22 @@
     {
         "ID": "1",
         "Valor": 200.0,
-        "Estoque": 10
+        "Estoque": 0
     },
     {
         "ID": "2",
         "Valor": 100.0,
-        "Estoque": 10
+        "Estoque": 2
     },
     {
         "ID": "3",
         "Valor": 50.0,
-        "Estoque": 10
+        "Estoque": 7
     },
     {
         "ID": "4",
         "Valor": 20.0,
-        "Estoque": 10
+        "Estoque": 2
     },
     {
         "ID": "5",
@@ -27,11 +27,11 @@
     {
         "ID": "6",
         "Valor": 5.0,
-        "Estoque": 10
+        "Estoque": 7
     },
     {
         "ID": "7",
         "Valor": 2.0,
-        "Estoque": 10
+        "Estoque": 9
     }
 ]

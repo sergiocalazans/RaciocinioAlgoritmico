@@ -462,4 +462,4 @@ while True:
         break
 
 # Mensagem final
-print("\nAgradeçemos por utilizar! Desenvolvido por: Isabelle, Libia e Sérgio.\n")
+print("\nAgradeçemos por utilizar! Desenvolvido por: Isabelle Duarte, Líbia Silveira e Sérgio Calazans.\n")
